@@ -6,6 +6,10 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        'light-gray': '#0E0E0E',
+        'light-blue': '#ADD8E6',
+      },
       width: {
         '128': '32rem',
       },
@@ -23,6 +27,9 @@ export default {
         '9/12': '75%',
         '10/12': '83.333333%',
         '11/12': '91.666667%',
+      },
+      fontFamily: {
+        poppins: ['Poppins'],
       }
     },
   },
