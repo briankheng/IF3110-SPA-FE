@@ -7,6 +7,8 @@ function Signup() {
     const [name, setName] = useState('');
     // Error Message
     const [errors, setErrors] = useState({ username: '', password: '', name: ''});
+    // For success signup
+    const [isSignupSuccess, setIsSignupSuccess] = useState(false);
 
     // Form Validation
     const validateForm = () => {
@@ -32,7 +34,7 @@ function Signup() {
         return valid;
     };
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = () => {
         event.preventDefault();
         if (validateForm()) {
           console.log('Submitted!');
@@ -78,10 +80,22 @@ function Signup() {
                     {errors.password && <p className="mt-2 text-red-500">{errors.name}</p>}
 
                     {/* Submit Button */}
-                    <button className="bg-green-500 rounded-lg mt-6 py-2 text-md font-bold hover:bg-green-400">Sign Up</button>
+                    <button className="bg-green-500 rounded-lg mt-6 py-2 text-md font-bold hover:bg-green-400" onClick={() => setIsSignupSuccess(true)}>Sign Up</button>
                 </form>
                 <p className="text-white text-sm md:text-base xl:text-lg mt-5">Have an account? <Link to="/login" className="text-light-blue hover:underline hover:text-blue-300">Login</Link></p>
             </div>
+
+            {/* Success Modal */}
+            {isSignupSuccess && (
+                <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center mb-20">
+                    <div className="flex flex-col justify-center items-center px-6 pt-4 pb-12 md:px-8 md:pt-6 md:pb-14 xl:px-10 xl:pt-8 xl:pb-16 border border-lime-400 bg-light-gray rounded-lg text-white font-poppins space-y-4">
+                        {/* Redirect to Login Page */}
+                        <Link to="/login" className="self-end text-lg md:text-xl xl:text-2xl">x</Link>
+                        <p className="text-base md:text-lg xl:text-xl font-semibold">CONGRATULATIONS!</p>
+                        <p className="text-sm md:text-base xl:text-lg text-center">Your KBL account is successfully created!</p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
