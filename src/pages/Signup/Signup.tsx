@@ -92,7 +92,7 @@ function Signup() {
                         {/* Redirect to Login Page */}
                         <Link to="/login" className="self-end text-lg md:text-xl xl:text-2xl">x</Link>
                         <p className="text-base md:text-lg xl:text-xl font-semibold">CONGRATULATIONS!</p>
-                        <p className="text-sm md:text-base xl:text-lg text-center">Your KBL account is successfully created!</p>
+                        <p className="text-sm md:text-base xl:text-lg text-center">Your KBL account has been successfully created!</p>
                     </div>
                 </div>
             )}
