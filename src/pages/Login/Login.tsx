@@ -66,7 +66,6 @@ function Login() {
                 </form>
                 <p className="text-white text-sm md:text-base xl:text-lg mt-5">Need a KBL account? <Link to="/signup" className="text-light-blue hover:underline hover:text-blue-300">Signup</Link></p>
             </div>
-            
         </div>
     );
 }
