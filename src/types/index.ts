@@ -34,3 +34,9 @@ export type Comment = {
   user_id: number;
   video_id: number;
 };
+
+export type AlbumResponse = Album & {
+  videos: Video[];
+  ratings: Rating[];
+  categories: Category[];
+};
