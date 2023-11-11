@@ -1,20 +1,26 @@
-import { Album, Category, Rating, Video } from "../../types";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+
 import AlbumDetailHeader from "../../components/AlbumDetailHeader/AlbumDetailHeader";
+import { AlbumApi } from "../../api";
 
-type AlbumDetailProps = Album & {
-  ratings: Rating[];
-  videos: Video[];
-  categories: Category[];
-};
+const AlbumDetail = () => {
+  const { id } = useParams();
 
-const AlbumDetail = (props: AlbumDetailProps) => {
-  // const { title, description, thumbnail, ratings, videos, categories } = props;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const album = await AlbumApi.getAlbum(id as string);
+        console.log(album);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-  return (
-    <>
-      <AlbumDetailHeader {...props} />
-    </>
-  );
+    fetchData();
+  }, [id]);
+
+  return <></>;
 };
 
 export default AlbumDetail;

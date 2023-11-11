@@ -5,16 +5,18 @@ import { AlbumRequest, AlbumResponse } from "../types";
 import { API_URL } from "../constant";
 
 class AlbumApi {
-  private static token = Cookies.get("token");
+  private static token = Cookies.get("token") || "";
+  private static axios = axios.create({
+    baseURL: API_URL,
+    headers: {
+      Authorization: `Bearer ${this.token}`,
+      "Content-Type": "application/json",
+    },
+  });
 
   static async getAlbums(): Promise<AlbumResponse[]> {
     try {
-      const response = await axios.get<AlbumResponse[]>(`${API_URL}/album`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await this.axios.get<AlbumResponse[]>("/album");
 
       return response.data;
     } catch (error) {
@@ -22,17 +24,9 @@ class AlbumApi {
     }
   }
 
-  static async getAlbum(id: number): Promise<AlbumResponse> {
+  static async getAlbum(id: string): Promise<AlbumResponse> {
     try {
-      const response = await axios.get<AlbumResponse>(
-        `${API_URL}/album/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await this.axios.get<AlbumResponse>(`/album/${id}`);
 
       return response.data;
     } catch (error) {
@@ -42,16 +36,7 @@ class AlbumApi {
 
   static async createAlbum(payload: AlbumRequest): Promise<AlbumResponse> {
     try {
-      const response = await axios.post<AlbumResponse>(
-        `${API_URL}/album`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await this.axios.post<AlbumResponse>("/album", payload);
 
       return response.data;
     } catch (error) {
@@ -60,19 +45,13 @@ class AlbumApi {
   }
 
   static async updateAlbum(
-    id: number,
+    id: string,
     payload: AlbumRequest
   ): Promise<AlbumResponse> {
     try {
-      const response = await axios.put<AlbumResponse>(
-        `${API_URL}/album/${id}`,
-        payload,
-        {
-          headers: {
-            Authorization: `Bearer ${this.token}`,
-            "Content-Type": "application/json",
-          },
-        }
+      const response = await this.axios.put<AlbumResponse>(
+        `/album/${id}`,
+        payload
       );
 
       return response.data;
@@ -81,14 +60,9 @@ class AlbumApi {
     }
   }
 
-  static async deleteAlbum(id: number): Promise<void> {
+  static async deleteAlbum(id: string): Promise<void> {
     try {
-      await axios.delete<void>(`${API_URL}/album/${id}`, {
-        headers: {
-          Authorization: `Bearer ${this.token}`,
-          "Content-Type": "application/json",
-        },
-      });
+      await this.axios.delete<void>(`/album/${id}`);
     } catch (error) {
       throw error;
     }
