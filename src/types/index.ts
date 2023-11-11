@@ -35,6 +35,8 @@ export type Comment = {
   video_id: number;
 };
 
+export type AlbumRequest = Omit<Album, "id">;
+
 export type AlbumResponse = Album & {
   videos: Video[];
   ratings: Rating[];
