@@ -1,5 +1,17 @@
-import { Outlet, RouteObject, createBrowserRouter, Link } from "react-router-dom";
-import { AlbumDetail, Login, Signup, RedeemToken, Album, Home } from "../pages";
+import {
+  Outlet,
+  RouteObject,
+  createBrowserRouter,
+  Link,
+} from "react-router-dom";
+import {
+  AlbumDetail,
+  Login,
+  Register,
+  RedeemToken,
+  Album,
+  Home,
+} from "../pages";
 import { ProtectedRoute } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -22,11 +34,15 @@ const routes: RouteObject[] = [
     children: [
       {
         path: "/",
-        element: <Home />
+        element: (
+          <ProtectedRoute role="user">
+            <Home />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "/album",
-        element: <Album />
+        element: <Album />,
       },
       {
         path: "/login",
@@ -34,7 +50,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "/register",
-        element: <Signup />,
+        element: <Register />,
       },
       {
         path: "/album/:id",
@@ -46,7 +62,7 @@ const routes: RouteObject[] = [
       },
       {
         path: "/redeem-token",
-        element: <RedeemToken  />,
+        element: <RedeemToken />,
       },
     ],
   },

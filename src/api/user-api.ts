@@ -24,15 +24,11 @@ class UserApi {
     }
   }
 
-  static async login(payload: AuthRequest): Promise<string> {
+  static async login(payload: AuthRequest): Promise<AuthResponse> {
     try {
-      const response = await axios.post<AuthResponse>(`${API_URL}/login`, payload, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await this.axios.post<AuthResponse>("/login", payload);
 
-      return response.data.token;
+      return response.data;
     } catch (error) {
       throw error;
     }
@@ -40,15 +36,7 @@ class UserApi {
 
   static async register(payload: UserRequest): Promise<UserResponse> {
     try {
-      const response = await axios.post<UserResponse>(
-        `${API_URL}/register`,
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await this.axios.post<UserResponse>("/register", payload);
 
       return response.data;
     } catch (error) {

@@ -44,11 +44,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const login = async (payload: AuthRequest) => {
     try {
-      const token = await UserApi.login(payload);
+      const auth = await UserApi.login(payload);
 
-      if (token) {
-        Cookies.set("token", token);
-        setToken(token);
+      if (auth) {
+        Cookies.set("token", auth.token);
+        setToken(auth.token);
       }
     } catch (error) {
       throw error;
