@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { UserApi } from "../../api";
 
 function Signup() {
     const [username, setUsername] = useState('');
@@ -34,11 +35,11 @@ function Signup() {
         return valid;
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm()) {
-          console.log('Submitted!');
-        }
+        // if (validateForm()) {
+          await UserApi.register({ email: "briankheng68@gmail.com", username, password, name })
+        // }
     };
 
     return (

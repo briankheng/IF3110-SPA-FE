@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { AuthRequest, UserRequest, UserResponse } from "../types";
+import { AuthRequest, AuthResponse, UserRequest, UserResponse } from "../types";
 import { API_URL } from "../constant";
 
 class UserApi {
@@ -26,9 +26,13 @@ class UserApi {
 
   static async login(payload: AuthRequest): Promise<string> {
     try {
-      const response = await axios.post<string>(`${API_URL}/login`, payload);
+      const response = await axios.post<AuthResponse>(`${API_URL}/login`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
-      return response.data;
+      return response.data.token;
     } catch (error) {
       throw error;
     }
@@ -36,7 +40,15 @@ class UserApi {
 
   static async register(payload: UserRequest): Promise<UserResponse> {
     try {
-      const response = await axios.post<UserResponse>(`${API_URL}/register`, payload);
+      const response = await axios.post<UserResponse>(
+        `${API_URL}/register`,
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       return response.data;
     } catch (error) {

@@ -58,6 +58,10 @@ export type AuthRequest = {
   password: string;
 };
 
+export type AuthResponse = {
+  token: string;
+};
+
 export type UserRequest = Omit<User, "id" | "is_admin" | "coins">;
 
 export type UserResponse = User & {

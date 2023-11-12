@@ -65,7 +65,7 @@ function Login() {
                     {/* Submit Button */}
                     <button className="bg-green-500 rounded-lg mt-6 py-2 text-md font-bold hover:bg-green-400">Login</button>
                 </form>
-                <p className="text-white text-sm md:text-base xl:text-lg mt-5">Need a KBL account? <Link to="/signup" className="text-light-blue hover:underline hover:text-blue-300">Signup</Link></p>
+                <p className="text-white text-sm md:text-base xl:text-lg mt-5">Need a KBL account? <Link to="/register" className="text-light-blue hover:underline hover:text-blue-300">Signup</Link></p>
             </div>
         </div>
     );
