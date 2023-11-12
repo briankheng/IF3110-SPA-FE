@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Signup } from "../pages";
+import { AlbumDetail, Login, Signup, RedeemToken } from "../pages";
 import { ProtectedRoute } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -35,6 +35,10 @@ const routes: RouteObject[] = [
             <AlbumDetail />
           </ProtectedRoute>
         ),
+      },
+      {
+        path: "/redeem-token",
+        element: <RedeemToken  />,
       },
     ],
   },
