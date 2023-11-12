@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { UserApi } from "../../api";
 import { UserRequest } from "../../types";
+import useAuth from "../../contexts/AuthContext";
 
 function Register() {
+  const { token } = useAuth();
+  const navigate = useNavigate();
+
   const [request, setRequest] = useState<UserRequest>({
     email: "",
     username: "",
@@ -18,7 +22,13 @@ function Register() {
     password: "",
     name: "",
   });
-  const navigate = useNavigate();
+
+  // Redirect to home if already logged in
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [token]);
 
   // Form Validation
   const validateForm = () => {
@@ -60,7 +70,7 @@ function Register() {
       await UserApi.register(request);
       navigate("/login");
     } catch (error) {
-      console.error(error);
+      alert((error as any).response.data.message);
     }
   };
 

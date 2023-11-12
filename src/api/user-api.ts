@@ -36,7 +36,10 @@ class UserApi {
 
   static async register(payload: UserRequest): Promise<UserResponse> {
     try {
-      const response = await this.axios.post<UserResponse>("/register", payload);
+      const response = await this.axios.post<UserResponse>(
+        "/register",
+        payload
+      );
 
       return response.data;
     } catch (error) {

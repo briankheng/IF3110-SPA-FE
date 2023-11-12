@@ -42,16 +42,16 @@ function Login() {
     return valid;
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!validateForm()) return;
 
     try {
-      login(request);
+      await login(request);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      alert((error as any).response.data.message);
     }
   };
 
