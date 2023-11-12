@@ -1,27 +1,12 @@
-import {
-  Outlet,
-  RouteObject,
-  createBrowserRouter,
-  Link,
-} from "react-router-dom";
-import {
-  AlbumDetail,
-  Login,
-  Register,
-  RedeemToken,
-  Album,
-  Home,
-} from "../pages";
-import { ProtectedRoute } from "../components";
+import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
+import { AlbumDetail, Login, Register, RedeemToken, Album, Home } from "../pages";
+import { ProtectedRoute, Navbar } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
 const AuthProviderLayout = () => {
   return (
     <AuthProvider>
-      <h1> KBL-SPA CEK CEKKK </h1>
-      <Link to="/">Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Link>
-      <Link to="/album">Album&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Link>
-      <Link to="/login">Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Link>
+      <Navbar />
       <Outlet />
     </AuthProvider>
   );
