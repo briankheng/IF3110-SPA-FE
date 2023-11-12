@@ -56,8 +56,8 @@ const Navbar: React.FC = () => {
                 <Link to="/album" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">Redeem Token</Link>
 
                 {/* UserName */}
-                <div className="flex items-center text-white mx-2 hover:bg-gray-600 px-5 rounded-3xl z-50" onMouseEnter={() => console.log('Show popover')}>
-                    <img src={userImage} alt="User" className="h-8 w-8 rounded-full mr-2" />
+                <div className="flex items-center text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl z-50" onMouseEnter={() => console.log('Show popover')}>
+                    <img src={userImage} alt="User" className="h-6 w-6 rounded-full mr-2" />
                     <div className="group">
                         <>
                             Michael Leon
