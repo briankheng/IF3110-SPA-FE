@@ -1,3 +1,13 @@
+export type User = {
+  id: number;
+  email: string;
+  username: string;
+  password: string;
+  is_admin: boolean;
+  name: string;
+  coins: number;
+};
+
 export type Album = {
   id: number;
   title: string;
@@ -41,4 +51,17 @@ export type AlbumResponse = Album & {
   videos: Video[];
   ratings: Rating[];
   categories: Category[];
+};
+
+export type AuthRequest = {
+  username: string;
+  password: string;
+};
+
+export type UserRequest = Omit<User, "id" | "is_admin" | "coins">;
+
+export type UserResponse = User & {
+  comments: Comment[];
+  ratings: Rating[];
+  videos: Video[];
 };

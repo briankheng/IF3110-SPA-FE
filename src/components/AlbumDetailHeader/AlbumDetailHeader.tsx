@@ -3,7 +3,7 @@ import { AlbumDetailHeaderProps } from "./AlbumDetailHeader.props";
 const AlbumDetailHeader = (props: AlbumDetailHeaderProps) => {
   const { title, thumbnail, ratings, categories } = props;
 
-  // const { user_id } = useContext(AuthContext);
+  // const { token } = useAuth();
 
   const ratingsAverage =
     ratings?.reduce((acc, rating) => acc + rating.score, 0) / ratings?.length;

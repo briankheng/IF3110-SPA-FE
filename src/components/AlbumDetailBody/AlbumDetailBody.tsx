@@ -3,7 +3,7 @@ import { AlbumDetailBodyProps } from "./AlbumDetailBody.props";
 const AlbumDetailBody = (props: AlbumDetailBodyProps) => {
   const { videos } = props;
 
-  // const { user_id } = useContext(AuthContext);
+  // const { token } = useAuth();
   // unlock video if user has bought the video
   // handle premium video (price: 10 koin)
 

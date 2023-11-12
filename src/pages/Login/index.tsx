@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import useAuth from "../../contexts/AuthContext";
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     // Error Message
     const [errors, setErrors] = useState({ username: '', password: '' });
+    const { login } = useAuth();
 
     // Form Validation
     const validateForm = () => {
@@ -28,9 +30,8 @@ function Login() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (validateForm()) {
-          console.log('Submitted!');
-        }
+        
+        login({ username, password });
     };
 
     return (
