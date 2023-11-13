@@ -4,7 +4,7 @@ import useAuth from "../../contexts/AuthContext";
 import { AuthRequest } from "../../types";
 
 function Login() {
-  const { token, login } = useAuth();
+  const { isAuthenticated, login } = useAuth();
   const navigate = useNavigate();
 
   const [request, setRequest] = useState<AuthRequest>({
@@ -16,10 +16,10 @@ function Login() {
 
   // Redirect to home if already logged in
   useEffect(() => {
-    if (token) {
+    if (isAuthenticated) {
       navigate("/");
     }
-  }, [token]);
+  }, [isAuthenticated]);
 
   // Form Validation
   const validateForm = () => {
@@ -51,7 +51,7 @@ function Login() {
       await login(request);
       navigate("/");
     } catch (error) {
-      alert((error as any).response.data.message);
+      alert((error as any)?.response?.data?.message);
     }
   };
 

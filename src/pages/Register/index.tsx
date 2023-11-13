@@ -6,7 +6,7 @@ import { UserRequest } from "../../types";
 import useAuth from "../../contexts/AuthContext";
 
 function Register() {
-  const { token } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
   const [request, setRequest] = useState<UserRequest>({
@@ -25,10 +25,10 @@ function Register() {
 
   // Redirect to home if already logged in
   useEffect(() => {
-    if (token) {
+    if (isAuthenticated) {
       navigate("/");
     }
-  }, [token]);
+  }, [isAuthenticated]);
 
   // Form Validation
   const validateForm = () => {
@@ -70,7 +70,7 @@ function Register() {
       await UserApi.register(request);
       navigate("/login");
     } catch (error) {
-      alert((error as any).response.data.message);
+      alert((error as any)?.response?.data?.message);
     }
   };
 

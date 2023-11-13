@@ -8,19 +8,17 @@ import { useEffect } from "react";
 const ProtectedRoute = (props: ProtectedRouteProps) => {
   const { role, children } = props;
 
-  const { token } = useAuth();
+  const { isAuthenticated, isAdmin } = useAuth();
   const navigate = useNavigate();
 
-  const fetchUser = async () => {
+  const checkAuth = async () => {
     try {
-      if (!token) {
+      if (!isAuthenticated) {
         navigate("/login");
         return;
       }
 
-      const user = await UserApi.getSelf();
-
-      if (role === "admin" && !user?.is_admin) {
+      if (role === "admin" && !isAdmin) {
         navigate("/");
         return;
       }
@@ -31,8 +29,8 @@ const ProtectedRoute = (props: ProtectedRouteProps) => {
   };
 
   useEffect(() => {
-    fetchUser();
-  }, [token]);
+    checkAuth();
+  }, []);
 
   return children;
 };
