@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../contexts/AuthContext';
 import userImage from '../../assets/images/user.png';
 import logo from '../../assets/images/logo.png';
@@ -7,10 +7,11 @@ import logo from '../../assets/images/logo.png';
 const Navbar: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const { logout, isAuthenticated, isAdmin, name } = useAuth();
+    const navigate = useNavigate();
 
     const handleSearch = () => {
         console.log('Searching for:', searchQuery);
-        window.location.href = "/search?title=" + searchQuery;
+        navigate("/search?title=" + searchQuery);
     };
 
     const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
