@@ -11,6 +11,7 @@ type AuthContext = {
   token: string | null;
   login: (payload: AuthRequest) => void;
   logout: () => void;
+  name: string;
 };
 
 const AuthContext = createContext<AuthContext>({
@@ -19,6 +20,7 @@ const AuthContext = createContext<AuthContext>({
   token: null,
   login: () => {},
   logout: () => {},
+  name: ""
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [token, setToken] = useState<string | null>(null);
+  const [name, setName] = useState("user");
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -40,6 +43,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
             const payload = jwtDecode(token) as any;
             setIsAdmin(payload.is_admin);
+            setName(user.name);
 
             setToken(token);
           }
@@ -83,7 +87,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, isAdmin, token, login, logout }}
+      value={{ isAuthenticated, isAdmin, token, login, logout, name }}
     >
       {children}
     </AuthContext.Provider>

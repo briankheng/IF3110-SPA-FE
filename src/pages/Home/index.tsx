@@ -1,7 +1,9 @@
 const Home = () => {
 
     return (
-        <h1>HALO DARI PAGE HOME</h1>
+        <div className="bg-black w-full h-[100vh]">
+            <h1>HALO DARI PAGE HOME</h1>
+        </div>
     );
 };
 

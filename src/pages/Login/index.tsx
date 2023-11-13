@@ -44,12 +44,12 @@ function Login() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
     if (!validateForm()) return;
-
+  
     try {
       await login(request);
-      navigate("/");
+      window.location.href = "/";
     } catch (error) {
       alert((error as any)?.message);
     }
