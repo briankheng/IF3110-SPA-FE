@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             setIsAuthenticated(true);
 
             const payload = jwtDecode(token) as any;
-            setIsAdmin(payload.is_admin);
+            setIsAdmin(payload.isAdmin);
             setName(user.name);
 
             setToken(token);
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         setIsAuthenticated(true);
 
         const payload = jwtDecode(auth.token) as any;
-        setIsAdmin(payload.is_admin);
+        setIsAdmin(payload.isAdmin);
 
         Cookies.set("token", auth.token);
         setToken(auth.token);

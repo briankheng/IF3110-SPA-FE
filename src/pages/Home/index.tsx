@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import movie from '../../assets/images/movie-dummy.jpg';
+import useAuth from '../../contexts/AuthContext';
 
 const Home: React.FC = () => {
+    const { isAdmin } = useAuth();
+
+    const handleAddAlbum = () => {
+        console.log('tambahin sini kack');
+    };
 
     return (
         <main className="bg-black text-white flex flex-col w-full min-h-screen">
@@ -17,7 +23,7 @@ const Home: React.FC = () => {
                     <p className="text-2xl mt-3">Immerse yourself in a cinematic journey like never before</p>
                 </div>
             </div>
-            <div className="w-full h-full px-10 p-5">
+            <div className="w-full h-full px-10 p-5 mb-8">
                 <div className="py-5 pb-7 text-4xl">
                     <h1>Albums you might like</h1>
                 </div>
@@ -118,6 +124,14 @@ const Home: React.FC = () => {
                         </div>
                     </div>
                 </div>
+                {isAdmin && (<>
+                    <div className="py-5 pb-7 text-4xl mt-7">
+                        <h1>Admin Section</h1>
+                    </div>
+                    <div className="h-full bg-gray-700 space-y-3 p-2 rounded-xl">
+                        <button onClick={handleAddAlbum} className="hover:bg-gray-900 p-3 px-5 rounded-xl">Create New Album</button>
+                    </div>
+                </>)}
             </div>
         </main>
     );

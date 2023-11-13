@@ -57,7 +57,7 @@ const Navbar: React.FC = () => {
                     </Link>
 
                     {/* RedeemToken */}
-                    {isAdmin ? 
+                    {isAdmin === true ? 
                         <Link to="/subscription" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
                             Subscription
                         </Link> :

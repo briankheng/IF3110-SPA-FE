@@ -1,6 +1,6 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
 import { AlbumDetail, Login, Register, RedeemToken, Album, Home } from "../pages";
-import { ProtectedRoute, Navbar } from "../components";
+import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
 const AuthProviderLayout = () => {
@@ -8,6 +8,7 @@ const AuthProviderLayout = () => {
     <AuthProvider>
       <Navbar />
       <Outlet />
+      <Footer />
     </AuthProvider>
   );
 };
