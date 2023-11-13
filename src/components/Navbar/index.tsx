@@ -10,6 +10,7 @@ const Navbar: React.FC = () => {
 
     const handleSearch = () => {
         console.log('Searching for:', searchQuery);
+        window.location.href = "/search?title=" + searchQuery;
     };
 
     const handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {

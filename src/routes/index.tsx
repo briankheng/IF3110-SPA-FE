@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Album, Home } from "../pages";
+import { AlbumDetail, Login, Register, RedeemToken, Album, Search, Home } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -44,6 +44,12 @@ const routes: RouteObject[] = [
           <ProtectedRoute role="user">
             <AlbumDetail />
           </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/search",
+        element: (
+          <Search />
         ),
       },
       {
