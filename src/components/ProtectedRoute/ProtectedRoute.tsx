@@ -1,9 +1,8 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useAuth from "../../contexts/AuthContext";
 import { ProtectedRouteProps } from "./ProtectedRoute.props";
-import { UserApi } from "../../api";
-import { useEffect } from "react";
 
 const ProtectedRoute = (props: ProtectedRouteProps) => {
   const { role, children } = props;

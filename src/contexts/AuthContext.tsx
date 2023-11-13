@@ -73,6 +73,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
+    setIsAuthenticated(false);
+    setIsAdmin(false);
     Cookies.remove("token");
     setToken(null);
   };
