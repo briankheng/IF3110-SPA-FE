@@ -45,6 +45,12 @@ export type Comment = {
   video_id: number;
 };
 
+export type Token = {
+  id: number;
+  value: string;
+  coinValue: number;
+};
+
 export type AlbumRequest = Omit<Album, "id">;
 
 export type AlbumResponse = Album & {
