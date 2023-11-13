@@ -23,3 +23,23 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #292F3B;
 }
+
+.hide-scrollbar {
+  /* Hide scrollbar track and thumb */
+  scrollbar-width: none;
+  scrollbar-color: black black;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  background: black;
+  margin-left: 1rem;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background-color: black;
+}
