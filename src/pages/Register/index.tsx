@@ -46,7 +46,7 @@ function Register() {
       valid = false;
     }
 
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(request.password)) {
+    if (!/^(?=.*[A-Za-z])(?=.*\d).{6,}$/.test(request.password)) {
       errors.password =
         "Password must be at least 6 characters long and contain at least one letter and one number.";
       valid = false;
