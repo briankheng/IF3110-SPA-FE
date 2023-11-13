@@ -52,10 +52,10 @@ function Register() {
       valid = false;
     }
 
-    if (!/^[A-Za-z]+$/.test(request.name)) {
-      errors.name = "Name must only contain letters.";
+    if (!/^[A-Za-z\s]+$/.test(request.name)) {
+      errors.name = "Name must only contain letters and spaces.";
       valid = false;
-    }
+    }    
 
     setErrors(errors);
     return valid;
