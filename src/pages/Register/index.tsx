@@ -70,7 +70,7 @@ function Register() {
       await UserApi.register(request);
       navigate("/login");
     } catch (error) {
-      alert((error as any)?.response?.data?.message);
+      alert((error as any)?.message);
     }
   };
 

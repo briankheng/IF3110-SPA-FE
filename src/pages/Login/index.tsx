@@ -51,7 +51,7 @@ function Login() {
       await login(request);
       navigate("/");
     } catch (error) {
-      alert((error as any)?.response?.data?.message);
+      alert((error as any)?.message);
     }
   };
 

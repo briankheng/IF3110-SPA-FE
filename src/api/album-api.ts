@@ -20,7 +20,7 @@ class AlbumApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -30,7 +30,7 @@ class AlbumApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -40,7 +40,7 @@ class AlbumApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -56,7 +56,7 @@ class AlbumApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -64,7 +64,7 @@ class AlbumApi {
     try {
       await this.axios.delete<void>(`/album/${id}`);
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 }

@@ -20,7 +20,7 @@ class UserApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -30,7 +30,7 @@ class UserApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 
@@ -43,7 +43,7 @@ class UserApi {
 
       return response.data;
     } catch (error) {
-      throw error;
+      throw (error as any)?.response?.data;
     }
   }
 }
