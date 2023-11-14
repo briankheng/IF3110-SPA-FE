@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CategoryApi } from "../../api";
 import { Category } from "../../types";
 
 const ChooseCategory: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,6 +20,10 @@ const ChooseCategory: React.FC = () => {
         fetchData();
     }, []);
 
+    const handleSelectCategory = (id : string) => {
+        navigate("/category?id=" + id);
+    };
+
     return (
         <main className="bg-black text-white flex flex-col w-full min-h-screen px-10 p-5 pt-10">
             <div className="h-full">
@@ -30,8 +36,9 @@ const ChooseCategory: React.FC = () => {
                 {categories.map((data) => (
                     <div
                         key={data.id}
-                        className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110"
+                        className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                         style={{ flex: '0 0 calc(25% - 100px)' }}
+                        onClick={() => {handleSelectCategory(data.id.toString())}}
                     >
                         <div className="w-full h-full">
                             <h1>{data.name}</h1>

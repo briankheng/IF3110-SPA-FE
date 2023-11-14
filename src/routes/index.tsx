@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Album, Search, Home, ChooseCategory } from "../pages";
+import { AlbumDetail, Login, Register, RedeemToken, Album, Search, Home, ChooseCategory, Category } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -53,6 +53,10 @@ const routes: RouteObject[] = [
       {
         path: "/choose-category",
         element: <ChooseCategory />,
+      },
+      {
+        path: "/category",
+        element: <Category />,
       },
       {
         path: "/redeem-token",

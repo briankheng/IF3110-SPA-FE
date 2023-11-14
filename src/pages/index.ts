@@ -6,5 +6,6 @@ import Album from "./Album";
 import Search from "./Search";
 import Home from "./Home";
 import ChooseCategory from "./ChooseCategory";
+import Category from "./Category";
 
-export { Login, Register, AlbumDetail, RedeemToken, Album, Search, Home, ChooseCategory };
+export { Login, Register, AlbumDetail, RedeemToken, Album, Search, Home, ChooseCategory, Category };

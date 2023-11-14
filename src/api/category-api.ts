@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { Category } from "../types";
+import { Category, SearchResponse } from "../types";
 import { API_URL } from "../constant";
 
 class CategoryApi {
@@ -17,6 +17,26 @@ class CategoryApi {
     static async getCategories(): Promise<Category[]> {
         try {
             const response = await this.axios.get<Category[]>("/category");
+
+            return response.data;
+        } catch (error) {
+            throw (error as any)?.response?.data;
+        }
+    }
+
+    static async getCategory(id: string): Promise<Category> {
+        try {
+          const response = await this.axios.get<Category>(`/category/${id}`);
+    
+          return response.data;
+        } catch (error) {
+          throw (error as any)?.response?.data;
+        }
+    }
+
+    static async getAlbumByCategory(id: string): Promise<SearchResponse[]> {
+        try {
+            const response = await this.axios.get<SearchResponse[]>(`/category/search?id=${id}`);
 
             return response.data;
         } catch (error) {
