@@ -75,3 +75,11 @@ export type UserResponse = User & {
   ratings: Rating[];
   videos: Video[];
 };
+
+export type SearchResponse = {
+  id: number;
+  title: string;
+  description: string;
+  thumbnail: string;
+  videos: Video[];
+}

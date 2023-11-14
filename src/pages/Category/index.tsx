@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import movie from '../../assets/images/movie-dummy.jpg';
 import { useLocation } from 'react-router-dom';
-import { AlbumApi } from "../../api";
-import { SearchResponse } from "../../types";
+import { CategoryApi } from "../../api";
+import { SearchResponse, Category } from "../../types";
 import { useNavigate } from 'react-router-dom';
 
-const Search: React.FC = () => {
+const CategoryPage: React.FC = () => {
     const location = useLocation();
-    const searchParams = new URLSearchParams(location.search);
-    const title = searchParams.get('title') || 'Default Title';
+    const CategoryParams = new URLSearchParams(location.search);
+    const id = CategoryParams.get('id') || 0;
     const [album, setAlbum] = useState<SearchResponse[]>([]);
+    const [category, setCategory] = useState<Category>({} as Category);
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const albums = await AlbumApi.search(title as string);
+                const categoryParam = await CategoryApi.getCategory(id as string);
+                setCategory(categoryParam);
+                const albums = await CategoryApi.getAlbumByCategory(id as string);
                 setAlbum(albums);
             } catch (error) {
                 console.error(error);
@@ -23,21 +26,22 @@ const Search: React.FC = () => {
         };
 
         fetchData();
-    }, [title]);
+    }, [id]);
 
     return (
         <main className="bg-black text-white flex flex-col w-full min-h-screen px-10 p-5 pt-10">
-            <div className="h-full">
-                <h1 className="text-3xl">Search Result for Title "{title}"</h1>
+            <div className="h-full flex space-x-5">
+                <div className="text-3xl cursor-pointer" onClick={() => {navigate('/choose-category')}}>←</div>
+                <div className="text-3xl">Album Result for Category "{category.name}"</div>
             </div>
             <div
                 className="w-full h-full mt-10 mb-8 flex flex-wrap justify-center items-center"
                 style={{ gap: '2rem' }}
             >
-                {album.map((data) => (
+                {album.length > 0 ? album.map((data) => (
                     <div
                         key={data.id}
-                        className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110"
+                        className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                         style={{ flex: '0 0 calc(25% - 100px)' }}
                         onClick={() => {navigate("/album/" + data.id)}}
                     >
@@ -49,10 +53,12 @@ const Search: React.FC = () => {
                             <h3>{data.description}</h3>
                         </div>
                     </div>
-                ))}
+                )) : (
+                    <div className="text-2xl w-full mt-10 h-full justify-center text-center">Album Not Found.</div>
+                )}
             </div>
         </main>
     );
 };
 
-export default Search;
+export default CategoryPage;

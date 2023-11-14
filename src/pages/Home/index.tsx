@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import movie from '../../assets/images/movie-dummy.jpg';
 import useAuth from '../../contexts/AuthContext';
+import { AlbumApi, FavoriteApi } from "../../api";
+import { AlbumResponse } from "../../types";
+import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
-    const { isAdmin } = useAuth();
+    const { isAdmin, userId } = useAuth();
+    const [recommend, setRecommend] = useState<AlbumResponse[]>([]);
+    const [favorite, setFavorite] = useState<AlbumResponse[]>([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const albums = await AlbumApi.recommend();
+                setRecommend(albums);
+                const favorites = await FavoriteApi.getFavorite(userId);
+                setFavorite(favorites);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchData();
+    }, []);
 
     const handleAddAlbum = () => {
         console.log('tambahin sini kack');
@@ -27,103 +48,49 @@ const Home: React.FC = () => {
                 <div className="py-5 pb-7 text-4xl">
                     <h1>Albums you might like</h1>
                 </div>
-                <div className="w-full h-full flex space-x-8 overflow-x-auto hide-scrollbar">
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
+                <div className="w-full h-full py-5 px-5 flex space-x-8 overflow-x-auto hide-scrollbar">
+                    {recommend && recommend.length > 0 ? recommend.map((data) => (
+                        <div 
+                            key={data.id} 
+                            className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                            onClick={() => {navigate("/album/" + data.id)}}
+                        >
+                            <div className="w-52 h-full">
+                                <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie"/>
+                            </div>
+                            <div className="w-full h-full">
+                                <h1>{data.title}</h1>
+                                <h3>{data.description}</h3>
+                            </div>
                         </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
+                    )) : (
+                        <div className="text-2xl w-full mt-10 h-full justify-center text-center">Album Not Found.</div>
+                    )}
                 </div>
+
                 <div className="py-5 pb-7 text-4xl mt-7">
                     <h1>Your Favorite Album(s)</h1>
                 </div>
-                <div className="w-full h-full flex space-x-8 overflow-x-auto hide-scrollbar">
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
+                <div className="w-full h-full py-5 px-5 flex space-x-8 overflow-x-auto hide-scrollbar">
+                    {favorite && favorite.length > 0 ? favorite.map((data) => (
+                        <div 
+                            key={data.id} 
+                            className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                            onClick={() => {navigate("/album/" + data.id)}}
+                        >
+                            <div className="w-52 h-full">
+                                <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie"/>
+                            </div>
+                            <div className="w-full h-full">
+                                <h1>{data.title}</h1>
+                                <h3>{data.description}</h3>
+                            </div>
                         </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
-                        <div className="w-52 h-full">
-                            <img src={movie} alt="Movie"/>
-                        </div>
-                        <div className="w-auto h-auto">
-                            <h1>Judul</h1>
-                            <h3>Deskripsi</h3>
-                        </div>
-                    </div>
+                    )) : (
+                        <div className="text-2xl w-full mt-10 h-full justify-center text-center">Favorite Album Not Found.</div>
+                    )}
                 </div>
+
                 {isAdmin && (<>
                     <div className="py-5 pb-7 text-4xl mt-7">
                         <h1>Admin Section</h1>

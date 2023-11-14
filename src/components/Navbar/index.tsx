@@ -54,7 +54,7 @@ const Navbar: React.FC = () => {
                 {/* Right Side Links */}
                 <div className="flex items-center space-x-5">
                     {/* Category */}
-                    <Link to="/album" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
+                    <Link to="/choose-category" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
                         Category
                     </Link>
 

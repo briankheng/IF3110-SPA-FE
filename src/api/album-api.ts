@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 
-import { AlbumRequest, AlbumResponse } from "../types";
+import { AlbumRequest, AlbumResponse, SearchResponse } from "../types";
 import { API_URL } from "../constant";
 
 class AlbumApi {
@@ -24,9 +24,29 @@ class AlbumApi {
     }
   }
 
+  static async recommend(): Promise<AlbumResponse[]> {
+    try {
+      const response = await this.axios.get<AlbumResponse[]>("/album/recommend");
+
+      return response.data;
+    } catch (error) {
+      throw (error as any)?.response?.data;
+    }
+  }
+
   static async getAlbum(id: string): Promise<AlbumResponse> {
     try {
       const response = await this.axios.get<AlbumResponse>(`/album/${id}`);
+
+      return response.data;
+    } catch (error) {
+      throw (error as any)?.response?.data;
+    }
+  }
+
+  static async search(title: string): Promise<SearchResponse[]> {
+    try {
+      const response = await this.axios.get<SearchResponse[]>(`/album/search?title=${title}`);
 
       return response.data;
     } catch (error) {

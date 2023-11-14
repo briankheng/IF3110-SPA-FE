@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Album, Search, Home } from "../pages";
+import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -27,10 +27,6 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: "/album",
-        element: <Album />,
-      },
-      {
         path: "/login",
         element: <Login />,
       },
@@ -49,12 +45,42 @@ const routes: RouteObject[] = [
       {
         path: "/search",
         element: (
-          <Search />
+          <ProtectedRoute role="user">
+            <Search />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/choose-category",
+        element: (
+          <ProtectedRoute role="user">
+            <ChooseCategory />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/category",
+        element: (
+          <ProtectedRoute role="user">
+            <Category />
+          </ProtectedRoute>
         ),
       },
       {
         path: "/redeem-token",
-        element: <RedeemToken />,
+        element: (
+          <ProtectedRoute role="user">
+            <RedeemToken />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "*",
+        element: (
+          <ProtectedRoute role="user">
+            <NotFound />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
