@@ -2,5 +2,6 @@ import AlbumApi from "./album-api";
 import UserApi from "./user-api";
 import CategoryApi from "./category-api";
 import FavoriteApi from "./favorite-api";
+import TokenApi from "./token-api";
 
-export { AlbumApi, UserApi, CategoryApi, FavoriteApi };
+export { AlbumApi, UserApi, CategoryApi, FavoriteApi, TokenApi };
