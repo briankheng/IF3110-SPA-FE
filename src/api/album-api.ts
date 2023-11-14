@@ -24,6 +24,16 @@ class AlbumApi {
     }
   }
 
+  static async recommend(): Promise<AlbumResponse[]> {
+    try {
+      const response = await this.axios.get<AlbumResponse[]>("/album/recommend");
+
+      return response.data;
+    } catch (error) {
+      throw (error as any)?.response?.data;
+    }
+  }
+
   static async getAlbum(id: string): Promise<AlbumResponse> {
     try {
       const response = await this.axios.get<AlbumResponse>(`/album/${id}`);

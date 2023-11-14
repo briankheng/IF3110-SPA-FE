@@ -15,7 +15,6 @@ const Search: React.FC = () => {
             try {
                 const albums = await AlbumApi.search(title as string);
                 setAlbum(albums);
-                console.log(albums);
             } catch (error) {
                 console.error(error);
             }
