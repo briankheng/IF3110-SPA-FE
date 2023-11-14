@@ -8,4 +8,6 @@ import ChooseCategory from "./ChooseCategory";
 import Category from "./Category";
 import NotFound from "./NotFound";
 
-export { Login, Register, AlbumDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound };
+import TestAlbumDetail from "./TestAlbumDetail";
+
+export { Login, Register, AlbumDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail };

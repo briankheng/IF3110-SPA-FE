@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound } from "../pages";
+import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -80,6 +80,12 @@ const routes: RouteObject[] = [
           <ProtectedRoute role="user">
             <NotFound />
           </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/abc",
+        element: (
+          <TestAlbumDetail />
         ),
       },
     ],
