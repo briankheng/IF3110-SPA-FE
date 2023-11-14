@@ -3,12 +3,14 @@ import movie from '../../assets/images/movie-dummy.jpg';
 import { useLocation } from 'react-router-dom';
 import { AlbumApi } from "../../api";
 import { SearchResponse } from "../../types";
+import { useNavigate } from 'react-router-dom';
 
 const Search: React.FC = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const title = searchParams.get('title') || 'Default Title';
     const [album, setAlbum] = useState<SearchResponse[]>([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,6 +39,7 @@ const Search: React.FC = () => {
                         key={data.id}
                         className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110"
                         style={{ flex: '0 0 calc(25% - 100px)' }}
+                        onClick={() => {navigate("/album/" + data.id)}}
                     >
                         <div className="w-52 h-full">
                             <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie" />

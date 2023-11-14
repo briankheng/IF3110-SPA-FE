@@ -43,6 +43,7 @@ const CategoryPage: React.FC = () => {
                         key={data.id}
                         className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                         style={{ flex: '0 0 calc(25% - 100px)' }}
+                        onClick={() => {navigate("/album/" + data.id)}}
                     >
                         <div className="w-52 h-full">
                             <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie" />
