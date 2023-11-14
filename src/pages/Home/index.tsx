@@ -43,13 +43,13 @@ const Home: React.FC = () => {
                 <div className="py-5 pb-7 text-4xl">
                     <h1>Albums you might like</h1>
                 </div>
-                <div className="w-full h-full flex space-x-8 overflow-x-auto hide-scrollbar">
+                <div className="w-full h-full py-5 px-5 flex space-x-8 overflow-x-auto hide-scrollbar">
                     {album.map((data) => (
-                        <div key={data.id} className="h-full bg-gray-700 space-y-3 p-5 rounded-xl">
+                        <div key={data.id} className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110">
                             <div className="w-52 h-full">
                                 <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie"/>
                             </div>
-                            <div className="w-auto h-auto">
+                            <div className="w-full h-full">
                                 <h1>{data.title}</h1>
                                 <h3>{data.description}</h3>
                             </div>
