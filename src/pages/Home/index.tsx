@@ -16,10 +16,8 @@ const Home: React.FC = () => {
             try {
                 const albums = await AlbumApi.recommend();
                 setRecommend(albums);
-                console.log(albums);
                 const favorites = await FavoriteApi.getFavorite(userId);
                 setFavorite(favorites);
-                console.log(favorites);
             } catch (error) {
                 console.error(error);
             }
