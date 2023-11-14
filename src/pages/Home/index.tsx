@@ -73,7 +73,7 @@ const Home: React.FC = () => {
                 <div className="py-5 pb-7 text-4xl mt-7">
                     <h1>Your Favorite Album(s)</h1>
                 </div>
-                <div className="w-full h-full flex space-x-8 overflow-x-auto hide-scrollbar">
+                <div className="w-full h-full py-5 px-5 flex space-x-8 overflow-x-auto hide-scrollbar">
                     {favorite && favorite.length > 0 ? favorite.map((data) => (
                         <div 
                             key={data.id} 
