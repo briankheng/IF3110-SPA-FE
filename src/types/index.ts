@@ -33,6 +33,12 @@ export type Rating = {
   albumId: number;
 };
 
+export type RatingRequest = {
+  score: number;
+  user_id: number;
+  album_id: number;
+};
+
 export type Category = {
   id: number;
   name: string;
@@ -92,4 +98,20 @@ export type SearchResponse = {
   description: string;
   thumbnail: string;
   videos: Video[];
+}
+
+export type SubscriptionRequest = {
+  userId: number;
+  albumId: number;
+};
+
+export type SubscriptionResponse = {
+  userId: number;
+  albumId: number;
+  status: string;
+};
+
+export type Favorite = {
+  userId: number;
+  albumId: number
 }
