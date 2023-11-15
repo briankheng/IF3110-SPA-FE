@@ -58,7 +58,7 @@ function CreateAlbum() {
 
     return (
         <div className="bg-black min-h-screen w-screen text-white font-poppins flex justify-center items-center">
-            <div className="border border-lime-700 rounded-lg px-7 md:px-12 pt-5 md:pt-10 pb-8 md:pb-12">
+            <div className="h-128 overflow-y-auto border border-lime-700 rounded-lg px-7 md:px-12 pt-5 md:pt-10 pb-8 md:pb-12">
                 <p className="text-center font-bold text-sm md:text-xl">Create Your Personalized Album!</p>
                 <form className="flex flex-col mt-10 gap-1 bg-light-gray px-5 md:px-7 pt-3 md:pt-5 pb-6 md:pb-8 rounded-lg text-xs md:text-base">
                 <label>Title</label>
