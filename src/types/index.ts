@@ -3,7 +3,7 @@ export type User = {
   email: string;
   username: string;
   password: string;
-  is_admin: boolean;
+  isAdmin: boolean;
   name: string;
   coins: number;
 };
@@ -22,15 +22,15 @@ export type Video = {
   url: string;
   thumbnail: string;
   views: number;
-  is_premium: boolean;
-  album_id: number;
+  isPremium: boolean;
+  albumId: number;
 };
 
 export type Rating = {
   id: number;
   score: number;
-  user_id: number;
-  album_id: number;
+  userId: number;
+  albumId: number;
 };
 
 export type Category = {
@@ -41,8 +41,8 @@ export type Category = {
 export type Comment = {
   id: number;
   text: string;
-  user_id: number;
-  video_id: number;
+  userId: number;
+  videoId: number;
 };
 
 export type Token = {
@@ -59,6 +59,16 @@ export type AlbumResponse = Album & {
   categories: Category[];
 };
 
+export type VideoRequest = Omit<Video, "id">;
+
+export type VideoResponse = Video & {
+  comments: Comment[];
+};
+
+export type CommentRequest = Omit<Comment, "id">;
+
+export type CommentResponse = Comment;
+
 export type AuthRequest = {
   username: string;
   password: string;
@@ -68,7 +78,7 @@ export type AuthResponse = {
   token: string;
 };
 
-export type UserRequest = Omit<User, "id" | "is_admin" | "coins">;
+export type UserRequest = Omit<User, "id" | "isAdmin" | "coins">;
 
 export type UserResponse = User & {
   comments: Comment[];
