@@ -8,7 +8,9 @@ import Home from "./Home";
 import ChooseCategory from "./ChooseCategory";
 import Category from "./Category";
 import NotFound from "./NotFound";
+import CreateAlbum from "./CreateAlbum";
+import CreateVideo from "./CreateVideo";
 
 import TestAlbumDetail from "./TestAlbumDetail";
 
-export { Login, Register, AlbumDetail, VideoDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail };
+export { Login, Register, AlbumDetail, VideoDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail, CreateAlbum, CreateVideo };

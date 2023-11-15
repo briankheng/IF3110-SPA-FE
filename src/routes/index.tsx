@@ -1,5 +1,5 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail, VideoDetail } from "../pages";
+import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail, VideoDetail, CreateAlbum, CreateVideo } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -94,6 +94,18 @@ const routes: RouteObject[] = [
         path: "/abc",
         element: (
           <TestAlbumDetail />
+        ),
+      },
+      {
+        path: "/create-album",
+        element: (
+          <CreateAlbum />
+        ),
+      },
+      {
+        path: "/create-video",
+        element: (
+          <CreateVideo />
         ),
       },
     ],
