@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import useAuth from '../../contexts/AuthContext';
 import { AlbumApi, RatingApi, FavoriteApi, SubscriptionApi } from "../../api";
 import { AlbumResponse, Video, Favorite, RatingRequest } from "../../types";
+import movie from '../../assets/images/movie-dummy.jpg';
 
 const AlbumDetail = () => {
   const { id } = useParams();
-  const { userId } = useAuth();
+  const { userId, isAdmin } = useAuth();
 
   const [album, setAlbum] = useState<AlbumResponse>({} as AlbumResponse);
   const [rating, setRating] = useState(0);
@@ -29,7 +30,7 @@ const AlbumDetail = () => {
         setRating(ratingData.score);
 
         // Subscription
-        const subscriptionData = await SubscriptionApi.getStatus(userId.toString(), id as string);
+        const subscriptionData = await SubscriptionApi.getStatus(userId, id ? parseInt(id, 10) : 0);
         setIsSubscribed(subscriptionData);
 
         // Favorite
@@ -63,9 +64,11 @@ const AlbumDetail = () => {
     if (!isSubscribed) {
       const subscriptionRes = await SubscriptionApi.request(userId.toString(), id as string);
       console.log(subscriptionRes);
+      alert("Your subscription request is on verification, please wait the confirmation process from admin");
     } else {
       const unsubscriptionRes = await SubscriptionApi.unsubscribe(userId.toString(), id as string);
       console.log(unsubscriptionRes);
+      alert("The album is unsubsribed!");
     }
     setIsSubscribed(!isSubscribed);
   }
@@ -92,25 +95,25 @@ const AlbumDetail = () => {
     // Siap buat fav dan unfav
     const sentData : RatingRequest = {
       score : ratingValue,
-      user_id: userId,
-      album_id: typeof id === 'string' ? parseInt(id, 10) : 0,
+      userId: userId,
+      albumId: typeof id === 'string' ? parseInt(id, 10) : 0,
     }
+    console.log(ratingValue);
 
-    if (ratingValue === 0) {
-      const ratingRes = await RatingApi.createRating(sentData);
-      console.log(ratingRes);
-    } else {
-      const ratingRes = await RatingApi.updateRating(sentData);
-      console.log(ratingRes);
-    }
+    const ratingRes = await RatingApi.createRating(sentData);
+    console.log(ratingRes);
     setRating(ratingValue);
   }
 
+  const handleAddVideo = () => {
+    console.log("add disini bg");
+  }
+
   return (
-    <div className="bg-black min-h-screen w-screen text-white px-12 py-3 xl:py-10">
+    <div className="bg-black min-h-screen w-full text-white px-12 py-3 xl:py-10">
             {/* Album Overview */}
             <div className="md:flex gap-7 md:px-7 py-10 text-white font-poppins">
-                <img src={album.thumbnail} className="w-48 mx-auto md:mx-0" />
+                <img src={album.thumbnail == "default" ? movie : album.thumbnail} className="w-48 mx-auto md:mx-0" />
                 <div className="bg-light-gray px-3 md:px-10 py-10 rounded-xl md:w-1/2">
                     <h1 className="font-bold text-xs md:text-2xl">{album.title}</h1>
                     <h2 className="mt-3 text-xs xl:text-base">{album.description}</h2>
@@ -118,13 +121,13 @@ const AlbumDetail = () => {
                     <div className="flex justify-center gap-2 md:gap-6 text-xs xl:text-base">
                         <button onClick={() => handleFavorite()} className={`border border-green-500 hover:bg-green-300 ${isFavorite ? 'bg-green-500' : ''} px-3 py-1 rounded-xl`}>Favorite</button>
                         <button onClick={() => handleSubscription()} className={`border border-red-600 hover:bg-red-300 ${isSubscribed ? 'bg-red-500' : ''} px-3 py-1 rounded-xl`}>Subscribe</button>
-                        <button className="bg-gray-500 hover:bg-gray-300 px-3 py-1 rounded-xl">+ Add Video</button>
+                        {isAdmin ? <button onClick={() => handleAddVideo()} className="bg-gray-500 hover:bg-gray-300 px-3 py-1 rounded-xl">+ Add Video</button> : <></>}
                     </div>
                     <hr className="my-4" />
 
                     {/* Star Rating */}
                     <ul className="flex justify-center">
-                        {[...Array(5)].map((i) => {
+                        {[...Array(5)].map((_, i) => {
                             const ratingValue = i + 1;
 
                             return (

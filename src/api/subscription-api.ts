@@ -14,7 +14,7 @@ class SubscriptionApi {
         },
     });
 
-    static async getStatus(userId: string, albumId: string): Promise<boolean> {
+    static async getStatus(userId: number, albumId: number): Promise<boolean> {
         try {
             const response = await this.axios.get<boolean>(`/subscribe?albumId=${albumId}&userId=${userId}`);
 
@@ -26,7 +26,7 @@ class SubscriptionApi {
 
     static async request(userId: string, albumId: string): Promise<SubscriptionResponse> {
         try {
-          const response = await this.axios.get<SubscriptionResponse>(`/subscribe/request?albumId=${albumId}&userId=${userId}`);
+          const response = await this.axios.post<SubscriptionResponse>(`/subscribe/request?albumId=${albumId}&userId=${userId}`);
     
           return response.data;
         } catch (error) {
@@ -36,7 +36,7 @@ class SubscriptionApi {
 
     static async unsubscribe(userId: string, albumId: string): Promise<SubscriptionResponse> {
         try {
-          const response = await this.axios.get<SubscriptionResponse>(`/subscribe/unsubscribe?albumId=${albumId}&userId=${userId}`);
+          const response = await this.axios.post<SubscriptionResponse>(`/subscribe/unsubscribe?albumId=${albumId}&userId=${userId}`);
     
           return response.data;
         } catch (error) {

@@ -35,8 +35,8 @@ export type Rating = {
 
 export type RatingRequest = {
   score: number;
-  user_id: number;
-  album_id: number;
+  userId: number;
+  albumId: number;
 };
 
 export type Category = {
