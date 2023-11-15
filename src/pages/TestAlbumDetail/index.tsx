@@ -40,13 +40,14 @@ function TestAlbumDetail() {
         <div className="bg-black min-h-screen w-screen text-white px-12 py-3 xl:py-10">
             {/* Album Overview */}
             <div className="md:flex gap-7 md:px-7 py-10 text-white font-poppins">
-                <img src={album.thumbnail} className="w-40 mx-auto md:mx-0" />
-                <div className="bg-light-gray px-3 md:px-10 py-10 rounded-xl">
-                    <h1 className="font-bold">{album.title}</h1>
+                <img src={album.thumbnail} className="w-48 mx-auto md:mx-0" />
+                <div className="bg-light-gray px-3 md:px-10 py-10 rounded-xl md:w-1/2">
+                    <h1 className="font-bold text-xs md:text-2xl">{album.title}</h1>
+                    <h2 className="mt-3 text-xs xl:text-base">{album.description}</h2>
                     <hr className="my-4" />
-                    <div className="flex text-xs justify-center gap-2 md:gap-6">
-                        <button onClick={() => setIsFavorite(true)} className={`border border-green-500 hover:bg-green-300 ${isFavorite ? 'bg-green-500' : ''} px-3 py-1 rounded-xl`}>Favorite</button>
-                        <button onClick={() => setIsSubscribed(true)} className={`border border-red-600 hover:bg-red-300 ${isSubscribed ? 'bg-red-500' : ''} px-3 py-1 rounded-xl`}>Subscribe</button>
+                    <div className="flex justify-center gap-2 md:gap-6 text-xs xl:text-base">
+                        <button onClick={() => setIsFavorite(!isFavorite)} className={`border border-green-500 hover:bg-green-300 ${isFavorite ? 'bg-green-500' : ''} px-3 py-1 rounded-xl`}>Favorite</button>
+                        <button onClick={() => setIsSubscribed(!isSubscribed)} className={`border border-red-600 hover:bg-red-300 ${isSubscribed ? 'bg-red-500' : ''} px-3 py-1 rounded-xl`}>Subscribe</button>
                         <button className="bg-gray-500 hover:bg-gray-300 px-3 py-1 rounded-xl">+ Add Video</button>
                     </div>
                     <hr className="my-4" />
@@ -90,7 +91,7 @@ function TestAlbumDetail() {
                         })}
                     </ul>
                     {/* Rating Score */}
-                    <div className="mt-2 text-center text-xs">Rating: {rating}/5</div>
+                    <div className="mt-2 text-center text-xs xl:text-base">Rating: {rating}/5</div>
                 </div>
             </div>
 
@@ -106,9 +107,9 @@ function TestAlbumDetail() {
                             key={video.id} 
                             className={`m-4 text-sm px-4 pt-4 pb-6 rounded-md bg-light-gray ${video.is_premium ? 'border border-light-blue text-gray-500' : ''} hover:bg-gray-600 hover:text-white transition-colors duration-200`} 
                             onClick={() => handleVideoClick(video)}>
-                            <img src={video.thumbnail} alt={video.title} className="w-20 md:w-32 h-12 md:h-20" />
-                            <h3 className="font-bold w-20 md:w-32">{video.title}</h3>
-                            <p className="w-20 md:w-32">{video.views} views</p>
+                            <img src={video.thumbnail} alt={video.title} className="w-20 md:w-60 h-12 md:h-32" />
+                            <h3 className="font-bold w-20 md:w-32 xl:text-lg">{video.title}</h3>
+                            <p className="w-20 md:w-32 text-xs xl:text-base">{video.views} views</p>
                         </div>
                     ))}
                 </div>
