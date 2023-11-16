@@ -138,21 +138,21 @@ const CreateAlbum = () => {
           <label className="mt-2">Category</label>
           <Select
             isMulti
-            onChange={(e) => setCategoryIds(e.map((item) => item.value))}
+            onChange={(e : any) => setCategoryIds(e.map((item) => item.value))}
             options={options}
             styles={{
-              singleValue: (base) => ({ ...base, color: "white" }),
-              valueContainer: (base) => ({
+              singleValue: (base : any) => ({ ...base, color: "white" }),
+              valueContainer: (base : any) => ({
                 ...base,
                 color: "black",
                 width: "100%",
               }),
-              control: (base) => ({
+              control: (base : any) => ({
                 ...base,
                 background: "#121212",
               }),
             }}
-            theme={(theme) => ({
+            theme={(theme : any) => ({
               ...theme,
               colors: {
                 ...theme.colors,

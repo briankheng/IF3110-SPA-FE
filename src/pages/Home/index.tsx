@@ -90,15 +90,6 @@ const Home: React.FC = () => {
                         <div className="text-2xl w-full mt-10 h-full justify-center text-center">Favorite Album Not Found.</div>
                     )}
                 </div>
-
-                {isAdmin && (<>
-                    <div className="py-5 pb-7 text-4xl mt-7">
-                        <h1>Admin Section</h1>
-                    </div>
-                    <div className="h-full bg-gray-700 space-y-3 p-2 rounded-xl">
-                        <button onClick={handleAddAlbum} className="hover:bg-gray-900 p-3 px-5 rounded-xl">Create New Album</button>
-                    </div>
-                </>)}
             </div>
         </main>
     );

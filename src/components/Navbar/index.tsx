@@ -60,8 +60,8 @@ const Navbar: React.FC = () => {
 
                     {/* RedeemToken */}
                     {isAdmin === true ? 
-                        <Link to="/subscription" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
-                            Subscription
+                        <Link to="/create-album" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
+                            Create Album
                         </Link> :
                         <Link to="/redeem-token" className="text-white mx-2 hover:bg-gray-600 p-2 px-5 rounded-3xl">
                             Redeem Token
