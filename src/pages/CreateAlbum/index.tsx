@@ -138,7 +138,7 @@ const CreateAlbum = () => {
           <label className="mt-2">Category</label>
           <Select
             isMulti
-            onChange={(e : any) => setCategoryIds(e.map((item) => item.value))}
+            onChange={(e : any) => setCategoryIds(e.map((item : any) => item.value))}
             options={options}
             styles={{
               singleValue: (base : any) => ({ ...base, color: "white" }),

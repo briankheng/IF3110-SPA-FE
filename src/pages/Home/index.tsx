@@ -6,7 +6,7 @@ import { AlbumResponse } from "../../types";
 import { useNavigate } from 'react-router-dom';
 
 const Home: React.FC = () => {
-    const { isAdmin, userId } = useAuth();
+    const { userId } = useAuth();
     const [recommend, setRecommend] = useState<AlbumResponse[]>([]);
     const [favorite, setFavorite] = useState<AlbumResponse[]>([]);
     const navigate = useNavigate();
@@ -25,10 +25,6 @@ const Home: React.FC = () => {
 
         fetchData();
     }, []);
-
-    const handleAddAlbum = () => {
-        console.log('tambahin sini kack');
-    };
 
     return (
         <main className="bg-black text-white flex flex-col w-full min-h-screen">
@@ -75,13 +71,13 @@ const Home: React.FC = () => {
                     {favorite && favorite.length > 0 ? favorite.map((data) => (
                         <div 
                             key={data.id} 
-                            className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                            className="h-full w-auto bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                             onClick={() => {navigate("/album/" + data.id)}}
                         >
                             <div className="w-52 h-full">
                                 <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie"/>
                             </div>
-                            <div className="w-full h-full">
+                            <div className="h-full">
                                 <h1>{data.title}</h1>
                                 <h3>{data.description}</h3>
                             </div>
