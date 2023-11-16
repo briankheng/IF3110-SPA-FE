@@ -119,7 +119,7 @@ const AlbumDetail = () => {
   }
 
   const handleDeleteAlbum = async () => {
-    toast.warn("Are you sure wanna delete this album?");
+    toast.info("Deleted this album");
     const AlbumDel = await AlbumApi.deleteAlbum(id as string);
     console.log(AlbumDel);
     navigate("/");
