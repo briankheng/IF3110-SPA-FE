@@ -101,7 +101,7 @@ const VideoDetail = () => {
   return (
     <div className="bg-black px-12">
       {/* video */}
-      <video key={video?.id} controls className="w-full">
+      <video key={video?.id} controls className="w-full pt-10">
         <source src={video?.url} type="video/mp4" />
       </video>
       <div>
@@ -123,14 +123,14 @@ const VideoDetail = () => {
             </h2>
           </div>
           <form className="mb-6" onSubmit={handleSubmit}>
-            <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-700 dark:border-gray-600">
               <label htmlFor="comment" className="sr-only">
                 Comment
               </label>
               <textarea
                 id="comment"
                 rows={4}
-                className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+                className="px-0 w-full resize-none text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-700"
                 placeholder="Write a comment..."
                 value={text}
                 onChange={(e) => setText(e.target.value)}

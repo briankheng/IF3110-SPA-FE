@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import useAuth from '../../contexts/AuthContext';
 import { AlbumApi, RatingApi, FavoriteApi, SubscriptionApi } from "../../api";
 import { AlbumResponse, Video, Favorite, RatingRequest } from "../../types";
@@ -9,6 +9,7 @@ import videodummy from '../../assets/images/video-dummy.png';
 const AlbumDetail = () => {
   const { id } = useParams();
   const { userId, isAdmin } = useAuth();
+  const navigate = useNavigate();
 
   const [album, setAlbum] = useState<AlbumResponse>({} as AlbumResponse);
   const [rating, setRating] = useState(0);
@@ -51,7 +52,9 @@ const AlbumDetail = () => {
 
   const handleVideoClick = (video : Video) => {
       if (video.isPremium) {
-          setShowConfirmationModal(true);
+        setShowConfirmationModal(true);
+      } else {
+        navigate("/video/" + video.id);
       }
   };
 
