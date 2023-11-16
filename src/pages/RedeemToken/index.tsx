@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../contexts/AuthContext";
 import { TokenApi } from "../../api";
 import { toast } from "react-toastify";
 
 function RedeemToken() {
-  const { userId } = useAuth(); 
+  const { userId, update, setUpdate } = useAuth(); 
   const [token, setToken] = useState("");
   const [redeemedTokenValue, setRedeemedTokenValue] = useState("");
   const [isRedeemSuccess, setIsRedeemSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async () => {
     try {
@@ -24,7 +26,8 @@ function RedeemToken() {
   };
 
   const goHome = () => {
-    window.location.href = "/";
+    setUpdate(!update); // trigger update
+    navigate("/");
   }
 
   const addCoinsToUser = async (coinValue: string) => {
