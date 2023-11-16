@@ -17,6 +17,7 @@ class TokenApi {
   static async checkToken(token: string): Promise<Token> {
     try {
       const response = await this.axios.post<Token>("/checkToken", { token });
+      console.log(response);
 
       return response.data;
     } catch (error) {

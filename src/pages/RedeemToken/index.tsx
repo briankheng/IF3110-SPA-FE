@@ -39,7 +39,7 @@ function RedeemToken() {
   }, [isRedeemSuccess]);
 
   return (
-    <div className="bg-black h-screen xl:w-screen flex flex-col justify-center items-center">
+    <div className="bg-black h-screen w-full flex flex-col justify-center items-center">
       <div className="flex flex-col justify-center items-center gap-3 bg-light-gray w-5/6 md:w-1/2 xl:w-1/3 overflow-y-auto px-2 py-10 xl:px-6 xl:py-14 rounded-xl text-white text-sm md:text-lg xl:text-xl font-poppins">
         <p className="text-center font-semibold text-lg md:text-xl xl:text-2xl">Redeem Your Token</p>
         {/* Token Input Field */}
