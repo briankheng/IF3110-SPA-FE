@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserApi } from "../../api";
 import { UserRequest } from "../../types";
 import useAuth from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 function Register() {
   const { isAuthenticated } = useAuth();
@@ -70,7 +71,7 @@ function Register() {
       await UserApi.register(request);
       navigate("/login");
     } catch (error) {
-      alert((error as any)?.message);
+      toast.error((error as any)?.message);
     }
   };
 

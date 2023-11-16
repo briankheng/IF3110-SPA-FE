@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 
 import { VideoApi } from "../../api";
 import { VideoRequest } from "../../types";
+import { toast } from "react-toastify";
 
 const EditVideo = () => {
   const { id } = useParams();
@@ -40,7 +41,7 @@ const EditVideo = () => {
         setIsPremium(video.isPremium ? "Yes" : "No");
         setAlbumId(video.albumId);
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     };
 
@@ -115,7 +116,7 @@ const EditVideo = () => {
         await VideoApi.updateVideo(id as string, request);
         navigate(`/album/${albumId}`);
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     }
   };

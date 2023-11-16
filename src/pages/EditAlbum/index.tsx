@@ -4,6 +4,7 @@ import Select from "react-select";
 
 import { AlbumApi, CategoryApi } from "../../api";
 import { AlbumRequest } from "../../types";
+import { toast } from "react-toastify";
 
 const EditAlbum = () => {
   const { id } = useParams();
@@ -49,7 +50,7 @@ const EditAlbum = () => {
           }))
         );
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     };
 
@@ -99,7 +100,7 @@ const EditAlbum = () => {
         await AlbumApi.updateAlbum(id as string, request);
         navigate("/");
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     }
   };

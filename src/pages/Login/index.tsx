@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../contexts/AuthContext";
 import { AuthRequest } from "../../types";
+import { toast } from "react-toastify";
 
 function Login() {
   const { isAuthenticated, login } = useAuth();
@@ -51,7 +52,7 @@ function Login() {
       await login(request);
       window.location.href = "/";
     } catch (error) {
-      alert((error as any)?.message);
+      toast.error((error as any)?.message);
     }
   };
 

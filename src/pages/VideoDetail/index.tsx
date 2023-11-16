@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 
 import { VideoApi, UserApi, CommentApi } from "../../api";
 import { VideoResponse, Comment, UserResponse } from "../../types";
+import { toast } from "react-toastify";
 
 type CommentWithUsername = Comment & { username: string };
 
@@ -32,7 +33,7 @@ const VideoDetail = () => {
         );
         setComments(comments);
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     };
 
@@ -52,7 +53,7 @@ const VideoDetail = () => {
         });
         setComments([...comments, { username: user.username, ...comment }]);
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       } finally {
         setText("");
       }
@@ -78,7 +79,7 @@ const VideoDetail = () => {
           )
         );
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     },
     [comments, user]
@@ -92,7 +93,7 @@ const VideoDetail = () => {
           comments.filter((comment) => comment.id !== deletedComment.id)
         );
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     },
     [comments]

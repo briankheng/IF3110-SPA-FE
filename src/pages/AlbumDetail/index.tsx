@@ -5,6 +5,7 @@ import { AlbumApi, RatingApi, FavoriteApi, SubscriptionApi } from "../../api";
 import { AlbumResponse, Video, Favorite, RatingRequest } from "../../types";
 import movie from '../../assets/images/movie-dummy.jpg';
 import videodummy from '../../assets/images/video-dummy.png';
+import { toast } from "react-toastify";
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -68,11 +69,11 @@ const AlbumDetail = () => {
     if (!isSubscribed) {
       const subscriptionRes = await SubscriptionApi.request(userId.toString(), id as string);
       console.log(subscriptionRes);
-      alert("Your subscription request is on verification, please wait the confirmation process from admin");
+      toast.info("Your subscription request is on verification, please wait the confirmation process from admin");
     } else {
       const unsubscriptionRes = await SubscriptionApi.unsubscribe(userId.toString(), id as string);
       console.log(unsubscriptionRes);
-      alert("The album is unsubsribed!");
+      toast.info("The album is unsubscribed!");
     }
     setIsSubscribed(!isSubscribed);
   }
@@ -118,7 +119,7 @@ const AlbumDetail = () => {
   }
 
   const handleDeleteAlbum = async () => {
-    alert("Are you sure wanna delete this album?");
+    toast.warn("Are you sure wanna delete this album?");
     const AlbumDel = await AlbumApi.deleteAlbum(id as string);
     console.log(AlbumDel);
     navigate("/");

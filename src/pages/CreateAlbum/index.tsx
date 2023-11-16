@@ -4,6 +4,7 @@ import Select from "react-select";
 
 import { AlbumApi, CategoryApi } from "../../api";
 import { AlbumRequest } from "../../types";
+import { toast } from "react-toastify";
 
 const CreateAlbum = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const CreateAlbum = () => {
           }))
         );
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     };
 
@@ -83,7 +84,7 @@ const CreateAlbum = () => {
         await AlbumApi.createAlbum(request);
         navigate("/");
       } catch (error) {
-        alert((error as any)?.message);
+        toast.error((error as any)?.message);
       }
     }
   };

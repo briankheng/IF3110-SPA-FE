@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuth from "../../contexts/AuthContext";
 import { TokenApi } from "../../api";
+import { toast } from "react-toastify";
 
 function RedeemToken() {
   const { userId } = useAuth(); 
@@ -15,10 +16,10 @@ function RedeemToken() {
         setIsRedeemSuccess(true);
         setRedeemedTokenValue(response.message);
       } else {
-        alert('Invalid token');
+        toast.error('Invalid token');
       }
     } catch (error) {
-      alert('An error occurred while redeeming the token');
+      toast.error('An error occurred while redeeming the token');
     }
   };
 
@@ -30,7 +31,7 @@ function RedeemToken() {
     try {
       await TokenApi.addCoins(userId, parseInt(coinValue, 10));
     } catch (error) {
-      alert('An error occurred while adding coins to the user');
+      toast.error('An error occurred while adding coins to the user');
     }
   };
 
