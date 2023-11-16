@@ -1,5 +1,18 @@
 import { Outlet, RouteObject, createBrowserRouter } from "react-router-dom";
-import { AlbumDetail, Login, Register, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, VideoDetail, CreateAlbum, CreateVideo } from "../pages";
+import {
+  AlbumDetail,
+  Login,
+  Register,
+  RedeemToken,
+  Search,
+  Home,
+  ChooseCategory,
+  Category,
+  NotFound,
+  VideoDetail,
+  CreateAlbum,
+  CreateVideo,
+} from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
 
@@ -85,13 +98,17 @@ const routes: RouteObject[] = [
       {
         path: "/create-album",
         element: (
-          <CreateAlbum />
+          <ProtectedRoute role="admin">
+            <CreateAlbum />
+          </ProtectedRoute>
         ),
       },
       {
-        path: "/create-video",
+        path: "/create-video/:id",
         element: (
-          <CreateVideo />
+          <ProtectedRoute role="admin">
+            <CreateVideo />
+          </ProtectedRoute>
         ),
       },
       {

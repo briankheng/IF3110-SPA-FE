@@ -101,7 +101,7 @@ const VideoDetail = () => {
   return (
     <div className="bg-black px-12">
       {/* video */}
-      <video key={video?.id} controls className="w-full pt-10">
+      <video key={video?.id} controls className="w-full">
         <source src={video?.url} type="video/mp4" />
       </video>
       <div>
@@ -139,7 +139,7 @@ const VideoDetail = () => {
             </div>
             <button
               type="submit"
-              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800 flex-end"
+              className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-gray-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-gray-400 flex-end"
             >
               Post comment
             </button>

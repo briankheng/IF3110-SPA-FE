@@ -110,7 +110,7 @@ const AlbumDetail = () => {
   }
 
   const handleAddVideo = () => {
-    console.log("add disini bg");
+    navigate("/create-video/" + id);
   }
 
   return (
