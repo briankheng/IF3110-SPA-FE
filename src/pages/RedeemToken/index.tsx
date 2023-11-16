@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import useAuth from "../../contexts/AuthContext";
 import { TokenApi } from "../../api";
 
@@ -15,7 +14,6 @@ function RedeemToken() {
       if (response.valid) {
         setIsRedeemSuccess(true);
         setRedeemedTokenValue(response.message);
-
       } else {
         alert('Invalid token');
       }
@@ -23,6 +21,10 @@ function RedeemToken() {
       alert('An error occurred while redeeming the token');
     }
   };
+
+  const goHome = () => {
+    window.location.href = "/";
+  }
 
   const addCoinsToUser = async (coinValue: string) => {
     try {
@@ -59,7 +61,7 @@ function RedeemToken() {
         <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center mb-20">
           <div className="flex flex-col justify-center items-center px-6 pt-4 pb-12 md:px-8 md:pt-6 md:pb-14 xl:px-10 xl:pt-8 xl:pb-16 border border-lime-400 bg-light-gray rounded-lg text-white font-poppins space-y-4">
             {/* Redirect to Home Page */}
-            <Link to="/" className="self-end text-lg md:text-xl xl:text-2xl">x</Link>
+            <button onClick={() => goHome()} className="self-end text-lg md:text-xl xl:text-2xl">x</button>
             <p className="text-base md:text-lg xl:text-xl font-semibold">CONGRATULATIONS!</p>
             <p className="text-sm md:text-base xl:text-lg text-center">Your token has been successfully redeemed!</p>
           </div>
