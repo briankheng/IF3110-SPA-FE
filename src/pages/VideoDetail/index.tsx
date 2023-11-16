@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import { VideoApi, UserApi, CommentApi } from "../../api";
 import { VideoResponse, Comment, UserResponse } from "../../types";
@@ -9,6 +9,8 @@ type CommentWithUsername = Comment & { username: string };
 
 const VideoDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<UserResponse>({} as UserResponse);
   const [video, setVideo] = useState<VideoResponse>({} as VideoResponse);
   const [comments, setComments] = useState<CommentWithUsername[]>([]);
@@ -22,6 +24,14 @@ const VideoDetail = () => {
 
         const video = await VideoApi.getVideo(id as string);
         setVideo(video);
+
+        if (
+          video.isPremium &&
+          !user.videos.some((v) => v.id === video.id)
+        ) {
+          navigate("/");
+          return;
+        }
 
         const comments = await Promise.all(
           video.comments.map(async (comment) => {
