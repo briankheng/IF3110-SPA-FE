@@ -14,6 +14,8 @@ type AuthContext = {
   name: string;
   userId: number;
   coin: number;
+  update: boolean;
+  setUpdate: (prop : boolean) => void;
 };
 
 const AuthContext = createContext<AuthContext>({
@@ -24,7 +26,9 @@ const AuthContext = createContext<AuthContext>({
   logout: () => {},
   name: "",
   userId: 0,
-  coin: 0
+  coin: 0,
+  update: false,
+  setUpdate: () => {}
 });
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
@@ -35,6 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [name, setName] = useState("user");
   const [userId, setUserId] = useState(0);
   const [coin, setCoin] = useState(0);
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -64,7 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     };
 
     fetchUser();
-  }, []);
+  }, [update]);
 
   const login = async (payload: AuthRequest) => {
     try {
@@ -95,7 +100,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, isAdmin, token, login, logout, name, userId, coin }}
+      value={{ isAuthenticated, isAdmin, token, login, logout, name, userId, coin, update, setUpdate }}
     >
       {children}
     </AuthContext.Provider>

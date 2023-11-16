@@ -22,7 +22,7 @@ import { IoCheckmarkSharp } from 'react-icons/io5';
 
 const AlbumDetail = () => {
   const { id } = useParams();
-  const { userId, isAdmin } = useAuth();
+  const { userId, isAdmin, update, setUpdate } = useAuth();
   const navigate = useNavigate();
 
   const [album, setAlbum] = useState<AlbumResponse>({} as AlbumResponse);
@@ -100,6 +100,7 @@ const AlbumDetail = () => {
     try {
       const user = await UserApi.buyVideo(activeVideo.id.toString());
       setUser(user);
+      setUpdate(!update); // trigger update
       navigate("/video/" + activeVideo.id);
     } catch (error) {
       alert((error as any)?.message);
@@ -117,7 +118,7 @@ const AlbumDetail = () => {
         id as string
       );
       console.log(subscriptionRes);
-      toast.info("Your subscription request is on verification, please wait the confirmation process from admin");
+      toast.info("The album is subscribed!");
     } else {
       const unsubscriptionRes = await SubscriptionApi.unsubscribe(
         userId.toString(),
@@ -139,9 +140,11 @@ const AlbumDetail = () => {
     if (!isFavorite) {
       const favRes = await FavoriteApi.add(sentData);
       console.log(favRes);
+      toast.info("The album is addded to favorite!");
     } else {
       const unfavRes = await FavoriteApi.remove(sentData);
       console.log(unfavRes);
+      toast.info("The album is removed from favorite!");
     }
     setIsFavorite(!isFavorite);
   };
@@ -172,7 +175,9 @@ const AlbumDetail = () => {
   const handleDeleteAlbum = async () => {
     toast.info("Deleted this album");
     const AlbumDel = await AlbumApi.deleteAlbum(id as string);
+    const FavDel = await FavoriteApi.removeFavoritesByAlbumId(parseInt(id as string, 10));
     console.log(AlbumDel);
+    console.log(FavDel);
     navigate("/");
   };
 
