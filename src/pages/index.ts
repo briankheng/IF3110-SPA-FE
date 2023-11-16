@@ -10,5 +10,20 @@ import Category from "./Category";
 import NotFound from "./NotFound";
 import CreateAlbum from "./CreateAlbum";
 import CreateVideo from "./CreateVideo";
+import EditVideo from "./EditVideo";
 
-export { Login, Register, AlbumDetail, VideoDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, CreateAlbum, CreateVideo };
+export {
+  Login,
+  Register,
+  AlbumDetail,
+  VideoDetail,
+  RedeemToken,
+  Search,
+  Home,
+  ChooseCategory,
+  Category,
+  NotFound,
+  CreateAlbum,
+  CreateVideo,
+  EditVideo,
+};

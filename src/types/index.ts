@@ -62,7 +62,9 @@ export type TokenResponse = {
   message: string;
 };
 
-export type AlbumRequest = Omit<Album, "id">;
+export type AlbumRequest = Omit<Album, "id"> & {
+  categoryIds: number[];
+};
 
 export type AlbumResponse = Album & {
   videos: Video[];
@@ -103,7 +105,7 @@ export type SearchResponse = {
   description: string;
   thumbnail: string;
   videos: Video[];
-}
+};
 
 export type SubscriptionRequest = {
   userId: number;
@@ -118,5 +120,5 @@ export type SubscriptionResponse = {
 
 export type Favorite = {
   userId: number;
-  albumId: number
-}
+  albumId: number;
+};

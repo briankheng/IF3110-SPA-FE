@@ -12,6 +12,7 @@ import {
   VideoDetail,
   CreateAlbum,
   CreateVideo,
+  EditVideo,
 } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -108,6 +109,14 @@ const routes: RouteObject[] = [
         element: (
           <ProtectedRoute role="admin">
             <CreateVideo />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/edit-video/:id",
+        element: (
+          <ProtectedRoute role="admin">
+            <EditVideo />
           </ProtectedRoute>
         ),
       },

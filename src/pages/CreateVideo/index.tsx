@@ -92,8 +92,8 @@ const CreateVideo = () => {
   };
 
   return (
-    <div className="bg-black h-screen xl:w-screen flex flex-col justify-center items-center">
-      <div className="bg-light-gray w-3/4 md:w-1/2 xl:w-1/3 overflow-y-auto px-10 py-10 xl:px-12 xl:py-16 rounded-lg text-white text-sm md:text-base xl:text-lg font-poppins">
+    <div className="bg-black w-full flex flex-col justify-center items-center">
+      <div className="bg-light-gray w-1/2 my-10 px-10 py-10 xl:px-12 xl:py-16 rounded-lg text-white text-sm md:text-base xl:text-lg font-poppins">
         <p className="text-center text-lg md:text-xl xl:text-2xl font-semibold">
           Add Video
         </p>
