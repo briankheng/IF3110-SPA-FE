@@ -116,7 +116,7 @@ const VideoDetail = () => {
         <source src={video?.url} type="video/mp4" />
       </video>
       <div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center mt-2">
           <h1 className="text-2xl font-bold text-white">{video?.title}</h1>
           <p className="text-sm text-gray-400">{video?.views} views</p>
         </div>
