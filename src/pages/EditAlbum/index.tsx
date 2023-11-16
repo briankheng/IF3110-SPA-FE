@@ -98,7 +98,7 @@ const EditAlbum = () => {
 
       try {
         await AlbumApi.updateAlbum(id as string, request);
-        navigate("/");
+        navigate(`/album/${id}`);
       } catch (error) {
         toast.error((error as any)?.message);
       }
