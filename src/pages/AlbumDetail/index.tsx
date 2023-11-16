@@ -301,13 +301,15 @@ const AlbumDetail = () => {
               style={{ flex: "0 0 calc(20% - 100px)" }}
               onClick={() => handleVideoClick(video)}
             >
-              <img
-                src={
-                  video.thumbnail == "default" ? videodummy : video.thumbnail
-                }
-                alt={video.title}
-                className="w-20 md:w-60 h-12 md:h-32"
-              />
+              <div className="flex justify-center items-center">
+                <img
+                  src={
+                    video.thumbnail == "default" ? videodummy : video.thumbnail
+                  }
+                  alt={video.title}
+                  className="w-20 md:w-60 h-12 md:h-32"
+                />
+              </div>
               <h3 className="font-bold w-20 md:w-32 xl:text-lg">
                 {video.title}
               </h3>
