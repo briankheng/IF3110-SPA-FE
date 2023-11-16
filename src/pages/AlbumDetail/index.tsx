@@ -18,7 +18,7 @@ import {
 import movie from "../../assets/images/movie-dummy.jpg";
 import videodummy from "../../assets/images/video-dummy.png";
 import { toast } from "react-toastify";
-import { IoCheckmarkSharp } from 'react-icons/io5';
+import { IoCheckmarkSharp } from "react-icons/io5";
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -79,7 +79,11 @@ const AlbumDetail = () => {
   }, [id]);
 
   const handleVideoClick = (video: Video) => {
-    if (video.isPremium && !user.videos.some((v) => v.id === video.id)) {
+    if (
+      video.isPremium &&
+      !user.videos.some((v) => v.id === video.id) &&
+      !isAdmin
+    ) {
       setActiveVideo(video);
       setShowConfirmationModal(true);
     } else {
@@ -175,7 +179,9 @@ const AlbumDetail = () => {
   const handleDeleteAlbum = async () => {
     toast.info("Deleted this album");
     const AlbumDel = await AlbumApi.deleteAlbum(id as string);
-    const FavDel = await FavoriteApi.removeFavoritesByAlbumId(parseInt(id as string, 10));
+    const FavDel = await FavoriteApi.removeFavoritesByAlbumId(
+      parseInt(id as string, 10)
+    );
     console.log(AlbumDel);
     console.log(FavDel);
     navigate("/");
@@ -208,7 +214,14 @@ const AlbumDetail = () => {
                 isSubscribed ? "bg-red-500" : ""
               } px-3 py-1 rounded-xl`}
             >
-              {isSubscribed ? <div className="flex justify-between gap-1 items-center"> Subscribed <IoCheckmarkSharp /></div> : "Subscribe"}
+              {isSubscribed ? (
+                <div className="flex justify-between gap-1 items-center">
+                  {" "}
+                  Subscribed <IoCheckmarkSharp />
+                </div>
+              ) : (
+                "Subscribe"
+              )}
             </button>
             {isAdmin ? (
               <>
@@ -299,7 +312,8 @@ const AlbumDetail = () => {
               key={video.id}
               className={`m-4 text-sm space-y-3 rounded-xl px-4 pt-4 pb-6 rounded-md bg-light-gray transition-transform duration-300 transform hover:scale-110 cursor-pointer ${
                 video.isPremium &&
-                !user.videos.some((v) => v.id === video.id)
+                !user.videos.some((v) => v.id === video.id) &&
+                !isAdmin
                   ? "border border-light-blue text-gray-500"
                   : ""
               } hover:bg-gray-600 hover:text-white transition-colors duration-200`}

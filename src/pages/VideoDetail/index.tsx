@@ -4,12 +4,14 @@ import { useParams, useNavigate } from "react-router-dom";
 import { VideoApi, UserApi, CommentApi } from "../../api";
 import { VideoResponse, Comment, UserResponse } from "../../types";
 import { toast } from "react-toastify";
+import useAuth from "../../contexts/AuthContext";
 
 type CommentWithUsername = Comment & { username: string };
 
 const VideoDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
 
   const [user, setUser] = useState<UserResponse>({} as UserResponse);
   const [video, setVideo] = useState<VideoResponse>({} as VideoResponse);
@@ -27,7 +29,8 @@ const VideoDetail = () => {
 
         if (
           video.isPremium &&
-          !user.videos.some((v) => v.id === video.id)
+          !user.videos.some((v) => v.id === video.id) &&
+          !isAdmin
         ) {
           navigate("/");
           return;
