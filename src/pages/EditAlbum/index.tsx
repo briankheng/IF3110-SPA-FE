@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Select from "react-select";
 
 import { AlbumApi, CategoryApi } from "../../api";
 import { AlbumRequest } from "../../types";
 
-const CreateAlbum = () => {
+const EditAlbum = () => {
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -21,6 +22,9 @@ const CreateAlbum = () => {
   const [options, setOptions] = useState<{ value: number; label: string }[]>(
     []
   );
+  const [selectedOption, setSelectedOption] = useState<
+    { value: number; label: string }[]
+  >([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +32,18 @@ const CreateAlbum = () => {
         const categories = await CategoryApi.getCategories();
         setOptions(
           categories.map((category) => ({
+            value: category.id,
+            label: category.name,
+          }))
+        );
+
+        const album = await AlbumApi.getAlbum(id as string);
+        setTitle(album.title);
+        setDescription(album.description);
+        setThumbnail(album.thumbnail);
+        setCategoryIds(album.categories.map((category) => category.id));
+        setSelectedOption(
+          album.categories.map((category) => ({
             value: category.id,
             label: category.name,
           }))
@@ -80,7 +96,7 @@ const CreateAlbum = () => {
       };
 
       try {
-        await AlbumApi.createAlbum(request);
+        await AlbumApi.updateAlbum(id as string, request);
         navigate("/");
       } catch (error) {
         alert((error as any)?.message);
@@ -92,7 +108,7 @@ const CreateAlbum = () => {
     <div className="bg-black w-full flex flex-col justify-center items-center">
       <div className="bg-light-gray w-1/2 my-10 px-10 py-10 xl:px-12 xl:py-16 rounded-lg text-white text-sm md:text-base xl:text-lg font-poppins">
         <p className="text-center text-lg md:text-xl xl:text-2xl font-semibold">
-          Add Album
+          Edit Album
         </p>
         <form
           onSubmit={handleSubmit}
@@ -138,7 +154,15 @@ const CreateAlbum = () => {
           <label className="mt-2">Category</label>
           <Select
             isMulti
-            onChange={(e) => setCategoryIds(e.map((item) => item.value))}
+            value={selectedOption}
+            onChange={(e) => {
+              setSelectedOption(e as { value: number; label: string }[]);
+              setCategoryIds(
+                e.map((category) => {
+                  return category.value;
+                })
+              );
+            }}
             options={options}
             styles={{
               singleValue: (base) => ({ ...base, color: "white" }),
@@ -173,7 +197,7 @@ const CreateAlbum = () => {
             type="submit"
             className="bg-lime-600 rounded-lg mt-8 py-2 text-md font-bold hover:bg-lime-300"
           >
-            Add
+            Edit
           </button>
         </form>
       </div>
@@ -181,4 +205,4 @@ const CreateAlbum = () => {
   );
 };
 
-export default CreateAlbum;
+export default EditAlbum;

@@ -9,6 +9,7 @@ import ChooseCategory from "./ChooseCategory";
 import Category from "./Category";
 import NotFound from "./NotFound";
 import CreateAlbum from "./CreateAlbum";
+import EditAlbum from "./EditAlbum";
 import CreateVideo from "./CreateVideo";
 import EditVideo from "./EditVideo";
 
@@ -24,6 +25,7 @@ export {
   Category,
   NotFound,
   CreateAlbum,
+  EditAlbum,
   CreateVideo,
   EditVideo,
 };

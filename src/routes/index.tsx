@@ -13,6 +13,7 @@ import {
   CreateAlbum,
   CreateVideo,
   EditVideo,
+  EditAlbum,
 } from "../pages";
 import { ProtectedRoute, Navbar, Footer } from "../components";
 import { AuthProvider } from "../contexts/AuthContext";
@@ -101,6 +102,14 @@ const routes: RouteObject[] = [
         element: (
           <ProtectedRoute role="admin">
             <CreateAlbum />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/edit-album/:id",
+        element: (
+          <ProtectedRoute role="admin">
+            <EditAlbum />
           </ProtectedRoute>
         ),
       },
