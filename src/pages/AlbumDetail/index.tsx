@@ -223,7 +223,7 @@ const AlbumDetail = () => {
                   onClick={() => handleDeleteAlbum()}
                   className="bg-red-500 hover:bg-gray-300 px-3 py-1 rounded-xl"
                 >
-                  - Delete Video
+                  - Delete Album
                 </button>
               </>
             ) : (
