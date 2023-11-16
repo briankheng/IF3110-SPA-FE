@@ -57,6 +57,11 @@ export type Token = {
   coinValue: number;
 };
 
+export type TokenResponse = {
+  valid: string;
+  message: string;
+};
+
 export type AlbumRequest = Omit<Album, "id">;
 
 export type AlbumResponse = Album & {

@@ -6,7 +6,7 @@ import { TokenApi } from "../../api";
 function RedeemToken() {
   const { userId } = useAuth(); 
   const [token, setToken] = useState("");
-  const [redeemedTokenValue, setRedeemedTokenValue] = useState(0);
+  const [redeemedTokenValue, setRedeemedTokenValue] = useState("");
   const [isRedeemSuccess, setIsRedeemSuccess] = useState(false);
 
   const handleSubmit = async () => {
@@ -14,7 +14,7 @@ function RedeemToken() {
       const response = await TokenApi.checkToken(token);
       if (response.valid) {
         setIsRedeemSuccess(true);
-        setRedeemedTokenValue(response.coinValue)
+        setRedeemedTokenValue(response.message);
 
       } else {
         alert('Invalid token');
@@ -24,9 +24,9 @@ function RedeemToken() {
     }
   };
 
-  const addCoinsToUser = async (coinValue: number) => {
+  const addCoinsToUser = async (coinValue: string) => {
     try {
-      await TokenApi.addCoins(userId, coinValue);
+      await TokenApi.addCoins(userId, parseInt(coinValue, 10));
     } catch (error) {
       alert('An error occurred while adding coins to the user');
     }

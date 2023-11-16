@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import { API_URL } from "../constant";
-import { Token } from "../types";
+import { TokenResponse } from "../types";
 
 class TokenApi {
   private static token = Cookies.get("token") || "";
@@ -14,10 +14,9 @@ class TokenApi {
     },
   });
 
-  static async checkToken(token: string): Promise<Token> {
+  static async checkToken(token: string): Promise<TokenResponse> {
     try {
-      const response = await this.axios.post<Token>("/checkToken", { token });
-      console.log(response);
+      const response = await this.axios.post<TokenResponse>("/token/check", { token });
 
       return response.data;
     } catch (error) {
@@ -27,7 +26,7 @@ class TokenApi {
 
   static async addCoins(userId: number, coinValue: number) {
     try {
-      const response = await this.axios.post("/addCoins", { userId, coinValue });
+      const response = await this.axios.post("/token/addCoins", { userId, coinValue });
 
       return response.data;
     } catch (error) {
