@@ -113,19 +113,38 @@ const AlbumDetail = () => {
     navigate("/create-video/" + id);
   }
 
+  const handleEditAlbum = () => {
+    navigate("/edit-album/" + id);
+  }
+
+  const handleDeleteAlbum = async () => {
+    alert("Are you sure wanna delete this album?");
+    const AlbumDel = await AlbumApi.deleteAlbum(id as string);
+    console.log(AlbumDel);
+    navigate("/");
+  }
+
   return (
     <div className="bg-black min-h-screen w-full text-white px-12 py-3 xl:py-10">
             {/* Album Overview */}
             <div className="md:flex gap-7 md:px-7 py-10 text-white font-poppins">
                 <img src={album.thumbnail == "default" ? movie : album.thumbnail} className="w-48 mx-auto md:mx-0" />
-                <div className="bg-light-gray px-3 md:px-10 py-10 rounded-xl md:w-1/2">
+                <div className="bg-light-gray px-3 md:px-10 py-10 rounded-xl md:w-full">
                     <h1 className="font-bold text-xs md:text-2xl">{album.title}</h1>
                     <h2 className="mt-3 text-xs xl:text-base">{album.description}</h2>
                     <hr className="my-4" />
-                    <div className="flex justify-center gap-2 md:gap-6 text-xs xl:text-base">
+                    <div className="flex justify-center gap-2 md:gap-6 text-xs xl:text-base w-full">
                         <button onClick={() => handleFavorite()} className={`border border-green-500 hover:bg-green-300 ${isFavorite ? 'bg-green-500' : ''} px-3 py-1 rounded-xl`}>Favorite</button>
                         <button onClick={() => handleSubscription()} className={`border border-red-600 hover:bg-red-300 ${isSubscribed ? 'bg-red-500' : ''} px-3 py-1 rounded-xl`}>Subscribe</button>
-                        {isAdmin ? <button onClick={() => handleAddVideo()} className="bg-gray-500 hover:bg-gray-300 px-3 py-1 rounded-xl">+ Add Video</button> : <></>}
+                        {isAdmin ? 
+                        <>
+                          <button onClick={() => handleAddVideo()} className="bg-gray-500 hover:bg-gray-300 px-3 py-1 rounded-xl">+ Add Video</button>
+                          <button onClick={() => handleEditAlbum()} className="bg-gray-600 hover:bg-gray-300 px-3 py-1 rounded-xl">\ Edit Album</button>
+                          <button onClick={() => handleDeleteAlbum()} className="bg-red-500 hover:bg-gray-300 px-3 py-1 rounded-xl">- Delete Video</button> 
+                        </> 
+                          : 
+                          <></>
+                        }
                     </div>
                     <hr className="my-4" />
 
