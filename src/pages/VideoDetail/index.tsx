@@ -27,7 +27,7 @@ const VideoDetail = () => {
 
         if (
           video.isPremium &&
-          !user.videos.some((userVideo) => userVideo.id === video.id)
+          !user.videos.some((v) => v.id === video.id)
         ) {
           navigate("/");
           return;
