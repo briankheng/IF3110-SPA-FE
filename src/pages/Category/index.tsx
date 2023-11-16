@@ -45,8 +45,8 @@ const CategoryPage: React.FC = () => {
                         style={{ flex: '0 0 calc(25% - 100px)' }}
                         onClick={() => {navigate("/album/" + data.id)}}
                     >
-                        <div className="w-52 h-full">
-                            <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie" />
+                        <div className="flex justify-center items-center">
+                            <img src={data.thumbnail == "default" ? movie : data.thumbnail} alt="Movie" className="w-52 h-full"/>
                         </div>
                         <div className="w-full h-full">
                             <h1>{data.title}</h1>
