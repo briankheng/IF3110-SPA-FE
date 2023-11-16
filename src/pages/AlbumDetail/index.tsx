@@ -4,6 +4,7 @@ import useAuth from '../../contexts/AuthContext';
 import { AlbumApi, RatingApi, FavoriteApi, SubscriptionApi } from "../../api";
 import { AlbumResponse, Video, Favorite, RatingRequest } from "../../types";
 import movie from '../../assets/images/movie-dummy.jpg';
+import videodummy from '../../assets/images/video-dummy.png';
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const AlbumDetail = () => {
 
         // Rating
         const ratingData = await RatingApi.getRating(userId.toString(), id as string);
-        setRating(ratingData.score);
+        setRating(ratingData && ratingData.score ? ratingData.score : 0);
 
         // Subscription
         const subscriptionData = await SubscriptionApi.getStatus(userId, id ? parseInt(id, 10) : 0);
@@ -174,13 +175,16 @@ const AlbumDetail = () => {
             <div>
                 <h2 className="text-center font-bold mt-2 md:mt-5 text-green-500">VIDEOS</h2>
                 {/* Videos */}
-                <div className="flex flex-wrap justify-around md:justify-normal">
+                <div className="w-full h-full mt-10 mb-8 flex flex-wrap justify-center items-center"
+                style={{ gap: '2rem' }}>
                     {videos.map((video) => (
                         <div 
                             key={video.id} 
-                            className={`m-4 text-sm px-4 pt-4 pb-6 rounded-md bg-light-gray ${video.isPremium ? 'border border-light-blue text-gray-500' : ''} hover:bg-gray-600 hover:text-white transition-colors duration-200`} 
-                            onClick={() => handleVideoClick(video)}>
-                            <img src={video.thumbnail} alt={video.title} className="w-20 md:w-60 h-12 md:h-32" />
+                            className={`m-4 text-sm space-y-3 rounded-xl px-4 pt-4 pb-6 rounded-md bg-light-gray transition-transform duration-300 transform hover:scale-110 cursor-pointer ${video.isPremium ? 'border border-light-blue text-gray-500' : ''} hover:bg-gray-600 hover:text-white transition-colors duration-200`} 
+                            style={{ flex: '0 0 calc(20% - 100px)' }}
+                            onClick={() => handleVideoClick(video)}
+                          >
+                            <img src={video.thumbnail == "default" ? videodummy : video.thumbnail} alt={video.title} className="w-20 md:w-60 h-12 md:h-32" />
                             <h3 className="font-bold w-20 md:w-32 xl:text-lg">{video.title}</h3>
                             <p className="w-20 md:w-32 text-xs xl:text-base">{video.views} views</p>
                         </div>

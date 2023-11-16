@@ -11,6 +11,4 @@ import NotFound from "./NotFound";
 import CreateAlbum from "./CreateAlbum";
 import CreateVideo from "./CreateVideo";
 
-import TestAlbumDetail from "./TestAlbumDetail";
-
-export { Login, Register, AlbumDetail, VideoDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, TestAlbumDetail, CreateAlbum, CreateVideo };
+export { Login, Register, AlbumDetail, VideoDetail, RedeemToken, Search, Home, ChooseCategory, Category, NotFound, CreateAlbum, CreateVideo };

@@ -91,12 +91,6 @@ const routes: RouteObject[] = [
         ),
       },
       {
-        path: "/abc",
-        element: (
-          <TestAlbumDetail />
-        ),
-      },
-      {
         path: "/create-album",
         element: (
           <CreateAlbum />
