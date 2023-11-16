@@ -51,8 +51,8 @@ const Home: React.FC = () => {
                             className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                             onClick={() => {navigate("/album/" + data.id)}}
                         >
-                            <div className="w-52 h-full">
-                                <img src={data?.thumbnail == "default" ? movie : data?.thumbnail} alt="Movie"/>
+                            <div className="flex justify-center items-center">
+                                <img src={data?.thumbnail == "default" ? movie : data?.thumbnail} alt="Movie" className="w-52 h-full"/>
                             </div>
                             <div className="w-full h-full">
                                 <h1>{data?.title}</h1>
@@ -74,8 +74,8 @@ const Home: React.FC = () => {
                             className="h-full w-auto bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
                             onClick={() => {navigate("/album/" + data?.id)}}
                         >
-                            <div className="w-52 h-full">
-                                <img src={data?.thumbnail == "default" ? movie : data?.thumbnail} alt="Movie"/>
+                            <div className="flex justify-center items-center">
+                                <img src={data?.thumbnail == "default" ? movie : data?.thumbnail} alt="Movie" className="w-52 h-full"/>
                             </div>
                             <div className="h-full">
                                 <h1>{data?.title}</h1>
