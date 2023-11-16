@@ -18,6 +18,7 @@ import {
 import movie from "../../assets/images/movie-dummy.jpg";
 import videodummy from "../../assets/images/video-dummy.png";
 import { toast } from "react-toastify";
+import { IoCheckmarkSharp } from 'react-icons/io5';
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -202,7 +203,7 @@ const AlbumDetail = () => {
                 isSubscribed ? "bg-red-500" : ""
               } px-3 py-1 rounded-xl`}
             >
-              Subscribe
+              {isSubscribed ? <div className="flex justify-between gap-1 items-center"> Subscribed <IoCheckmarkSharp /></div> : "Subscribe"}
             </button>
             {isAdmin ? (
               <>
