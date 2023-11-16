@@ -177,15 +177,33 @@ const AlbumDetail = () => {
   };
 
   const handleDeleteAlbum = async () => {
-    toast.info("Deleted this album");
-    const AlbumDel = await AlbumApi.deleteAlbum(id as string);
-    const FavDel = await FavoriteApi.removeFavoritesByAlbumId(
-      parseInt(id as string, 10)
-    );
-    console.log(AlbumDel);
-    console.log(FavDel);
-    navigate("/");
-  };
+    try {
+      // Notify user
+      toast.info("Deleting this album...");
+  
+      // Make API requests concurrently
+      const [albumResponse, favResponse, subsResponse] = await Promise.all([
+        AlbumApi.deleteAlbum(id as string),
+        FavoriteApi.removeFavoritesByAlbumId(parseInt(id as string, 10)),
+        SubscriptionApi.removeSubscriptionsByAlbumId(id as string)
+      ]);
+  
+      // Check responses if needed
+      console.log(albumResponse);
+      console.log(favResponse);
+      console.log(subsResponse);
+  
+      // Notify user of success
+      toast.success("Album deleted successfully");
+  
+      // Redirect user
+      navigate("/");
+    } catch (error) {
+      // Handle errors
+      console.error("Error deleting album:", error);
+      toast.error("Error deleting album. Please try again.");
+    }
+  };  
 
   return (
     <div className="bg-black min-h-screen w-full text-white px-12 py-3 xl:py-10">

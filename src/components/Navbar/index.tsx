@@ -76,7 +76,7 @@ const Navbar: React.FC = () => {
                         <img src={userImage} alt="User" className="h-6 w-6 rounded-full mr-2" />
                         <div className="group-hover:block relative z-50">
                             <h1 className="pl-2">{name}</h1>
-                            <h1 className="text-xs pl-2">Coins : {coin}</h1>
+                            {isAdmin === false ?  <h1 className="text-xs pl-2">Coins : {coin}</h1> : <></>}
                             <div className="group-hover:block hidden absolute bg-gray-700 p-2 mt-2 rounded z-50">
                                 <button onClick={handleLogout} className="z-[100] px-5">Logout</button>
                             </div>

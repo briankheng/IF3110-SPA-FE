@@ -83,6 +83,7 @@ class AlbumApi {
   static async deleteAlbum(id: string): Promise<void> {
     try {
       await this.axios.delete<void>(`/album/${id}`);
+      return;
     } catch (error) {
       throw (error as any)?.response?.data;
     }

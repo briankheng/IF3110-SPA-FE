@@ -26,7 +26,7 @@ class SubscriptionApi {
 
     static async request(userId: string, albumId: string): Promise<SubscriptionResponse> {
         try {
-          const response = await this.axios.post<SubscriptionResponse>(`/subscribe/request?albumId=${albumId}&userId=${userId}`);
+          const response = await this.axios.post<SubscriptionResponse>(`/subscribe?albumId=${albumId}&userId=${userId}`);
     
           return response.data;
         } catch (error) {
@@ -36,12 +36,22 @@ class SubscriptionApi {
 
     static async unsubscribe(userId: string, albumId: string): Promise<SubscriptionResponse> {
         try {
-          const response = await this.axios.post<SubscriptionResponse>(`/subscribe/unsubscribe?albumId=${albumId}&userId=${userId}`);
+          const response = await this.axios.delete<SubscriptionResponse>(`/subscribe?albumId=${albumId}&userId=${userId}`);
     
           return response.data;
         } catch (error) {
           throw (error as any)?.response?.data;
         }
+    }
+
+    static async removeSubscriptionsByAlbumId(id: string): Promise<void> {
+      try {
+        await this.axios.delete<void>(`/subscribe/${id}`);
+  
+        return;
+      } catch (error) {
+        throw (error as any)?.response?.data;
+      }
     }
 }
 
