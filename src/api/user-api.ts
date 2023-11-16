@@ -56,6 +56,18 @@ class UserApi {
       throw (error as any)?.response?.data;
     }
   }
+
+  static async buyVideo(videoId: string): Promise<UserResponse> {
+    try {
+      const response = await this.axios.post<UserResponse>(
+        `/user/buy/${videoId}`
+      );
+
+      return response.data;
+    } catch (error) {
+      throw (error as any)?.response?.data;
+    }
+  }
 }
 
 export default UserApi;
