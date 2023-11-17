@@ -1,0 +1,45 @@
+@import '@fortawesome/fontawesome-free/css/all.css';
+
+/* Customize the scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+  border-radius: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+  margin-left: 1rem;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b4b7c4;
+  border-radius: 12px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #292F3B;
+}
+
+.hide-scrollbar {
+  /* Hide scrollbar track and thumb */
+  scrollbar-width: none;
+  scrollbar-color: black black;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0;
+}
+
+.hide-scrollbar::-webkit-scrollbar-track {
+  background: black;
+  margin-left: 1rem;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  background-color: black;
+}
