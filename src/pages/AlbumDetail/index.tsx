@@ -163,7 +163,7 @@ const AlbumDetail = () => {
       albumId: typeof id === "string" ? parseInt(id, 10) : 0,
     };
 
-    const ratingRes = await RatingApi.createRating(sentData);
+    await RatingApi.createRating(sentData);
     setRating(ratingValue);
   };
 
@@ -177,9 +177,6 @@ const AlbumDetail = () => {
 
   const handleDeleteAlbum = async () => {
     try {
-      // Notify user
-      toast.info("Deleting this album...");
-
       // Make API requests concurrently
       const [albumResponse, favResponse, subsResponse] = await Promise.all([
         AlbumApi.deleteAlbum(id as string),

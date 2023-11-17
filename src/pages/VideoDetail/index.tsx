@@ -113,7 +113,7 @@ const VideoDetail = () => {
   );
 
   return (
-    <div className="bg-black px-12 pt-10">
+    <div className="bg-black px-12">
       {/* video */}
       <video key={video?.id} controls className="w-full">
         <source src={video?.url} type="video/mp4" />
