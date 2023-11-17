@@ -30,7 +30,7 @@ const Home: React.FC = () => {
     <main className="bg-black text-white flex flex-col w-full min-h-screen">
       <div className="relative h-screen overflow-hidden">
         <img
-          src="https://res.cloudinary.com/ehizeex-shop/image/upload/v1668267540/NetflixApp/avengers-age-of-ultron-team-together-poster-wallpaper-1600x600-92751_84_qvwbif.jpg"
+          src="https://images4.alphacoders.com/133/1336451.jpg"
           alt="Hero Background"
           className="absolute inset-0 object-cover w-full h-full"
         />
