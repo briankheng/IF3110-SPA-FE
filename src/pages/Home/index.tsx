@@ -64,7 +64,7 @@ const Home: React.FC = () => {
                   />
                 </div>
                 <div className="w-full h-full">
-                  <h1>{data?.title}</h1>
+                  <h1 className="font-bold text-xl mb-3">{data?.title}</h1>
                   <h3>
                     {data?.description.trim().length > 30
                       ? data?.description.substring(0, 30) + "..."
@@ -101,7 +101,7 @@ const Home: React.FC = () => {
                   />
                 </div>
                 <div className="h-full">
-                  <h1>{data?.title}</h1>
+                  <h1 className="font-bold text-xl mb-3">{data?.title}</h1>
                   <h3>
                     {data?.description.trim().length > 30
                       ? data?.description.substring(0, 30) + "..."
