@@ -8,7 +8,7 @@ const CreateVideo = () => {
   const { id: albumId } = useParams();
   const navigate = useNavigate();
 
-  const [isPremium, setIsPremium] = useState("");
+  const [isPremium, setIsPremium] = useState("No");
   const [isOpenPremium, setIsOpenPremium] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
