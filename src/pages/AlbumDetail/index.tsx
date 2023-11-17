@@ -181,7 +181,7 @@ const AlbumDetail = () => {
       const [albumResponse, favResponse, subsResponse] = await Promise.all([
         AlbumApi.deleteAlbum(id as string),
         FavoriteApi.removeFavoritesByAlbumId(parseInt(id as string, 10)),
-        SubscriptionApi.removeSubscriptionsByAlbumId(id as string),
+        SubscriptionApi.removeSubscriptionsByAlbumId(id as string)
       ]);
 
       // Check responses if needed
