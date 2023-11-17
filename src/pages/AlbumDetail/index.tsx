@@ -7,6 +7,7 @@ import {
   FavoriteApi,
   SubscriptionApi,
   UserApi,
+  VideoApi,
 } from "../../api";
 import {
   AlbumResponse,
@@ -18,7 +19,7 @@ import {
 import movie from "../../assets/images/movie-dummy.jpg";
 import videodummy from "../../assets/images/video-dummy.png";
 import { toast } from "react-toastify";
-import { IoCheckmarkSharp, IoPencil, IoTrash } from 'react-icons/io5';
+import { IoCheckmarkSharp, IoPencil, IoTrash } from "react-icons/io5";
 
 const AlbumDetail = () => {
   const { id } = useParams();
@@ -95,7 +96,7 @@ const AlbumDetail = () => {
     // Siap buat bayar
     const user = await UserApi.getSelf();
     if (user.coins < 10) {
-      alert("You don't have enough coins!");
+      toast.error("You don't have enough coins!");
       setActiveVideo({} as Video);
       setShowConfirmationModal(false);
       return;
@@ -107,7 +108,7 @@ const AlbumDetail = () => {
       setUpdate(!update); // trigger update
       navigate("/video/" + activeVideo.id);
     } catch (error) {
-      alert((error as any)?.message);
+      toast.error((error as any)?.message);
     } finally {
       setActiveVideo({} as Video);
       setShowConfirmationModal(false);
@@ -161,10 +162,8 @@ const AlbumDetail = () => {
       userId: userId,
       albumId: typeof id === "string" ? parseInt(id, 10) : 0,
     };
-    console.log(ratingValue);
 
     const ratingRes = await RatingApi.createRating(sentData);
-    console.log(ratingRes);
     setRating(ratingValue);
   };
 
@@ -180,22 +179,22 @@ const AlbumDetail = () => {
     try {
       // Notify user
       toast.info("Deleting this album...");
-  
+
       // Make API requests concurrently
       const [albumResponse, favResponse, subsResponse] = await Promise.all([
         AlbumApi.deleteAlbum(id as string),
         FavoriteApi.removeFavoritesByAlbumId(parseInt(id as string, 10)),
-        SubscriptionApi.removeSubscriptionsByAlbumId(id as string)
+        SubscriptionApi.removeSubscriptionsByAlbumId(id as string),
       ]);
-  
+
       // Check responses if needed
       console.log(albumResponse);
       console.log(favResponse);
       console.log(subsResponse);
-  
+
       // Notify user of success
       toast.success("Album deleted successfully");
-  
+
       // Redirect user
       navigate("/");
     } catch (error) {
@@ -203,7 +202,21 @@ const AlbumDetail = () => {
       console.error("Error deleting album:", error);
       toast.error("Error deleting album. Please try again.");
     }
-  };  
+  };
+
+  const handleEditVideo = (vidio: Video) => {
+    navigate("/edit-video/" + vidio.id);
+  };
+
+  const handleDeleteVideo = async (vidio: Video) => {
+    try {
+      await VideoApi.deleteVideo(vidio.id.toString());
+
+      window.location.reload();
+    } catch (error) {
+      toast.error("Error deleting video. Please try again.");
+    }
+  };
 
   return (
     <div className="bg-black min-h-screen w-full text-white px-12 py-3 xl:py-10">
@@ -336,26 +349,35 @@ const AlbumDetail = () => {
                   : ""
               } hover:bg-gray-600 hover:text-white transition-colors duration-200`}
               style={{ flex: "0 0 calc(20% - 100px)" }}
-              onClick={() => handleVideoClick(video)}
             >
-              <div className="flex justify-center items-center">
-                <img
-                  src={
-                    video.thumbnail == "default" ? videodummy : video.thumbnail
-                  }
-                  alt={video.title}
-                  className="w-20 md:w-60 h-12 md:h-32"
-                />
+              <div onClick={() => handleVideoClick(video)}>
+                <div className="flex justify-center items-center">
+                  <img
+                    src={
+                      video.thumbnail == "default"
+                        ? videodummy
+                        : video.thumbnail
+                    }
+                    alt={video.title}
+                    className="w-20 md:w-60 h-12 md:h-32"
+                  />
+                </div>
+                <h3 className="font-bold w-20 md:w-32 xl:text-lg">
+                  {video.title}
+                </h3>
+                <p className="w-20 md:w-32 text-xs xl:text-base">
+                  {video.views} views
+                </p>
               </div>
-              <h3 className="font-bold w-20 md:w-32 xl:text-lg">
-                {video.title}
-              </h3>
-              <p className="w-20 md:w-32 text-xs xl:text-base">
-                {video.views} views
-              </p>
-              <div className="flex justify-end"> 
-                <IoPencil className="mr-2 md:mr-4 cursor-pointer hover:text-blue-500 text-base md:text-xl xl:text-2xl" /> 
-                <IoTrash className="cursor-pointer hover:text-red-500 text-base md:text-xl xl:text-2xl" /> 
+              <div className="flex justify-end">
+                <IoPencil
+                  className="mr-2 md:mr-4 cursor-pointer hover:text-blue-500 text-base md:text-xl xl:text-2xl"
+                  onClick={() => handleEditVideo(video)}
+                />
+                <IoTrash
+                  className="cursor-pointer hover:text-red-500 text-base md:text-xl xl:text-2xl"
+                  onClick={() => handleDeleteVideo(video)}
+                />
               </div>
             </div>
           ))}
