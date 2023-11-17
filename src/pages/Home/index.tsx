@@ -50,21 +50,22 @@ const Home: React.FC = () => {
           {recommend && recommend.length > 0 ? (
             recommend.map((data) => (
               <div
-                key={data?.id}
+                key={data.id}
                 className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                style={{ flex: "0 0 calc(25% - 100px)" }}
                 onClick={() => {
                   navigate("/album/" + data.id);
                 }}
               >
                 <div className="flex justify-center items-center">
                   <img
-                    src={data?.thumbnail == "default" ? movie : data?.thumbnail}
+                    src={data.thumbnail == "default" ? movie : data.thumbnail}
                     alt="Movie"
                     className="w-52 h-full"
                   />
                 </div>
                 <div className="w-full h-full">
-                  <h1 className="font-bold text-xl mb-3">{data?.title}</h1>
+                  <h1 className="font-bold text-xl mb-3">{data.title}</h1>
                   <h3>
                     {data?.description.trim().length > 30
                       ? data?.description.substring(0, 30) + "..."
@@ -81,27 +82,28 @@ const Home: React.FC = () => {
         </div>
 
         <div className="py-5 pb-7 text-4xl mt-7">
-          <h1>Your Favorite Album(s)</h1>
+          <h1>Your Favorite Albums</h1>
         </div>
         <div className="w-full h-full py-5 px-5 flex space-x-8 overflow-x-auto hide-scrollbar">
           {favorite && favorite.length > 0 ? (
             favorite.map((data) => (
               <div
-                key={data?.id}
-                className="h-full w-auto bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                key={data.id}
+                className="h-full bg-gray-700 space-y-3 p-5 rounded-xl transition-transform duration-300 transform hover:scale-110 cursor-pointer"
+                style={{ flex: "0 0 calc(25% - 100px)" }}
                 onClick={() => {
-                  navigate("/album/" + data?.id);
+                  navigate("/album/" + data.id);
                 }}
               >
                 <div className="flex justify-center items-center">
                   <img
-                    src={data?.thumbnail == "default" ? movie : data?.thumbnail}
+                    src={data.thumbnail == "default" ? movie : data.thumbnail}
                     alt="Movie"
                     className="w-52 h-full"
                   />
                 </div>
-                <div className="h-full">
-                  <h1 className="font-bold text-xl mb-3">{data?.title}</h1>
+                <div className="w-full h-full">
+                  <h1 className="font-bold text-xl mb-3">{data.title}</h1>
                   <h3>
                     {data?.description.trim().length > 30
                       ? data?.description.substring(0, 30) + "..."
