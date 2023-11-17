@@ -366,16 +366,18 @@ const AlbumDetail = () => {
                   {video.views} views
                 </p>
               </div>
-              <div className="flex justify-end">
-                <IoPencil
-                  className="mr-2 md:mr-4 cursor-pointer hover:text-blue-500 text-base md:text-xl xl:text-2xl"
-                  onClick={() => handleEditVideo(video)}
-                />
-                <IoTrash
-                  className="cursor-pointer hover:text-red-500 text-base md:text-xl xl:text-2xl"
-                  onClick={() => handleDeleteVideo(video)}
-                />
-              </div>
+              {isAdmin && (
+                <div className="flex justify-end">
+                  <IoPencil
+                    className="mr-2 md:mr-4 cursor-pointer hover:text-blue-500 text-base md:text-xl xl:text-2xl"
+                    onClick={() => handleEditVideo(video)}
+                  />
+                  <IoTrash
+                    className="cursor-pointer hover:text-red-500 text-base md:text-xl xl:text-2xl"
+                    onClick={() => handleDeleteVideo(video)}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>
